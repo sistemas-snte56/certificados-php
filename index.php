@@ -23,7 +23,7 @@
     <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
     <meta name="author" content="ThemePixels">
 
-    <title>Certificados SNTE 56</title>
+    <title>Sección56|SNTE :: Certificados</title>
 
     <!-- vendor css -->
     <link href="public/lib/font-awesome/css/font-awesome.css" rel="stylesheet">

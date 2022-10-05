@@ -1,5 +1,8 @@
 <?php
 
+    # Inicializamos la sesion del usuario
+    session_start();
+
     // Se inicia la clase conectar
     class Conectar{
         
@@ -24,7 +27,7 @@
         }
 
         #Ruta principal del proyecto
-        public function ruta() {
+        public static function ruta() {
             return "http://certificados-php.test/";
         }
     }

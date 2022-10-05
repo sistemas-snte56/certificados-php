@@ -34,7 +34,7 @@
                     if (is_array($resultado) and count($resultado)>0){
 
                         # Creamos unas variables de session 
-                        $_SESSION["usuario_id "]=$resultado["usuario_id"];
+                        $_SESSION["usuario_id"] =$resultado["usuario_id"];
                         $_SESSION["usuario_name"]=$resultado["usuario_name"];
                         $_SESSION["usuario_ap"]=$resultado["usuario_ap"];
                         $_SESSION["usuario_am"]=$resultado["usuario_am"];

@@ -25,7 +25,7 @@
             <span class="menu-item-label">Perfil</span>
           </div><!-- menu-item -->
         </a><!-- br-menu-link -->
-        <a href="#" class="br-menu-link">
+        <a href="../html/logout.php" class="br-menu-link">
           <div class="br-menu-item">
             <i class="menu-item-icon icon ion-power tx-18"></i>
             <span class="menu-item-label">Cerrar sesion</span>
