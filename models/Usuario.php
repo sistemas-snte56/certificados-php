@@ -2,7 +2,7 @@
 
     class Usuario extends Conectar {
         
-        #Función para login de acceso a usuario
+        # Función para login de acceso a usuario
         public function login(){
             
             $cn = parent::conexion();
@@ -97,6 +97,36 @@
             // }
 
 
+
+        }
+
+        # Mostrar todos los cursos por usuario
+        public function get_cursos_x_usuario($usuario_id){
+            $cn = parent::conexion();
+            parent::set_names();
+
+            # Preparando la consulta SQL para mostrar los cursos que corresponden a un usuario
+            $sql = "SELECT 
+                tbl_curso_usuario.curso_id AS CURSO_USUARIO,
+                tbl_curso.curso_id AS ID_DEL_CURSO,
+                tbl_curso.curso_name AS NOMBRE_CURSO,
+                tbl_curso.curso_descripcion AS DESCRIPCION,
+                tbl_curso.curso_fecha_inicial AS FECHA_INICIAL,
+                tbl_curso.curso_fecha_final AS FECHA_FINAL,
+                tbl_usuario.usuario_id AS ID_USUARIO,
+                tbl_usuario.usuario_name AS NOMBRE_USUARIO,
+                tbl_instructor.instructor_name AS NOMBRE_INSTRUCTOR
+                FROM `tbl_curso_usuario` 
+                INNER JOIN tbl_curso ON tbl_curso_usuario.curso_id = tbl_curso.curso_id
+                INNER JOIN tbl_usuario ON tbl_curso_usuario.usuario_id = tbl_usuario.usuario_id
+                INNER JOIN tbl_instructor ON tbl_curso.curso_id = tbl_instructor.instructor_id
+                WHERE tbl_curso_usuario.usuario_id = ?;
+            ";
+
+            $stmt = $cn->prepare($sql);
+            $stmt->bindValue(1, $usuario_id);
+            $stmt->execute();
+            return $resultado = $stmt->fetch();
 
         }
     }
