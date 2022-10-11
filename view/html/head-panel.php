@@ -13,6 +13,8 @@
           <span class="logged-name hidden-md-down">
             
                 <?php
+                    echo $_SESSION['usuario_id'];
+                    echo "&nbsp";                        
                     echo $_SESSION['usuario_name'];
                     echo "&nbsp";                        
                     echo $_SESSION['usuario_ap'];
@@ -21,10 +23,10 @@
                 ?>
 
           </span>
-          <img src="http://via.placeholder.com/64x64" class="wd-32 rounded-circle" alt="">
+          <img src="../../public/img/logo.png" class="wd-32 rounded-circle" alt="">
           <span class="square-10 bg-success"></span>
         </a>
-        <input type="hidden" name="usuario_id" id="usuario_id" value=" <?php echo $_SESSION['usuario_id'] ?> ">
+        <input type="hidden" name="usuario_idX" id="usuario_id" value=" <?php echo $_SESSION['usuario_id'] ?> ">
         <div class="dropdown-menu dropdown-menu-header wd-200">
           <ul class="list-unstyled user-profile-nav">
             <li><a href="../UsuPerfil/"><i class="icon ion-ios-gear"></i> Perfil</a></li>

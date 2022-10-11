@@ -15,9 +15,10 @@
                 </head>
             <body>
                 <?php
-                require_once '../../view/html/left-panel.php';
-                require_once '../../view/html/head-panel.php';
+                    require_once '../../view/html/left-panel.php';
+                    require_once '../../view/html/head-panel.php';
                 ?>
+                
                 <!-- ########## START: MAIN PANEL ########## -->
                 <div class="br-mainpanel">
                     <div class="br-pageheader pd-y-15 pd-l-20">

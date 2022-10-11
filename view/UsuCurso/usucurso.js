@@ -1,4 +1,4 @@
-console.log("Ok");
+// console.log("Ok");
 $(document).ready(function(){
     $('#tbl_cursos').DataTable({
         "aProcessing" : true,
@@ -9,6 +9,13 @@ $(document).ready(function(){
             'excelHtml5',
             'csvHtml5',
         ],
+        "ajax" : {
+            url: "../../controller/UsuarioController.php?opcion=listar_cursos",
+            type : "post",
+            data : {
+                usuario_id : 2
+            },
+        },
         "bDestroy" : true,
         "responsive" : true,
         "bInfo" : true,
@@ -40,3 +47,7 @@ $(document).ready(function(){
         },
     });
 });
+
+function certificado(ID_DEL_CURSO) {
+    window.open('../documents/index.php?Idcurso=' + ID_DEL_CURSO + '', '_blank');
+}

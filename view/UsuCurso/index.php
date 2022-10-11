@@ -31,11 +31,8 @@
 				</div>
 				<div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
                     <h4 class="tx-gray-800 mg-b-5">Cursos</h4>
-                    <p class="mg-b-0">Pantalla principal del (Cursos)</p>
+                    <!-- <p class="mg-b-0"> </p> -->
 				</div>
-
-
-
 
                 <div class="br-pagebody">
                     <div class="br-section-wrapper">
@@ -56,11 +53,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Tiger</td>
-                                        <td>Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>2011/04/25</td>
-                                        <td>$320,800</td>
+
                                         
                                     </tr>
                                 </tbody>
@@ -77,6 +70,26 @@
                             </table>
                         </div><!-- table-wrapper -->
                     </div><!-- br-section-wrapper -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 </div><!-- br-pagebody -->
 
                 <?php require_once '../../view/html/footer-panel.php'; ?>
