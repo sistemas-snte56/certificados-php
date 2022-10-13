@@ -17,7 +17,7 @@ $(document).ready(function () {
             'csvHtml5',
         ],
         "ajax": {
-            url: "../../controller/UsuarioController.php?opcion=get_cursos_x_usuario_top10",
+            url: "../../controller/UsuarioController.php?opcion=listar_cursos_top10",
             type: "post",
             data: {
                 usuario_id: usuario_id

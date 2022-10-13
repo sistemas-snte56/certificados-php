@@ -47,10 +47,9 @@
                         <div class="card bd-0 shadow-base pd-30 mg-t-20">
                             <div class="d-flex align-items-center justify-content-between mg-b-30">
                                 <div>
-                                <h6 class="tx-13 tx-uppercase tx-inverse tx-semibold tx-spacing-1">Resumen total de cursos</h6>
-                                <p class="mg-b-0"><i class="fa fa-address-book mg-r-5"></i> Aquí podra visualizar los cursos</p>
+                                    <h6 class="tx-13 tx-uppercase tx-inverse tx-semibold tx-spacing-1">Resumen total de cursos</h6>
+                                    <p class="mg-b-0"><i class="fa fa-address-book mg-r-5"></i> Aquí podra visualizar los cursos</p>
                                 </div>
-                                <a href="" class="btn btn-outline-info btn-oblong tx-11 tx-uppercase tx-mont tx-medium tx-spacing-1 pd-x-30 bd-2">See more</a>
                             </div><!-- d-flex -->
 
                             <div class="table-wrapper">
@@ -61,14 +60,11 @@
                                             <th>Fecha de Inicio</th>
                                             <th>Fecha Final</th>
                                             <th>Instructor</th>
-                                            <th>Ver</th>
-                                            
+                                            <th>Estatus</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-
-                                            
                                         </tr>
                                     </tbody>
                                     <tfoot>
@@ -77,8 +73,7 @@
                                             <th>Fecha de Inicio</th>
                                             <th>Fecha Final</th>
                                             <th>Instructor</th>
-                                            <th>Ver</th>
-                                            
+                                            <th>Estatus</th>
                                         </tr>
                                     </tfoot>
                                 </table>

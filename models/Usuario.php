@@ -166,7 +166,7 @@
             $cn = parent::conexion();
             parent::set_names();
 
-            # Preparando la consulta SQL para mostrar los cursos que corresponden a un usuario
+            # Preparando la consulta SQL para mostrar todos los cursos que corresponden a un usuario
             $sql = "SELECT
                 tbl_curso_usuario.curso_id AS CURSO_USUARIO,
                 tbl_curso.curso_id AS ID_DEL_CURSO,
@@ -177,7 +177,8 @@
                 tbl_usuario.usuario_id AS ID_USUARIO,
                 tbl_usuario.usuario_name AS NOMBRE_USUARIO,
                 tbl_instructor.instructor_name AS NOMBRE_INSTRUCTOR,
-                tbl_instructor.instructor_ap AS AP_INSTRUCTOR
+                tbl_instructor.instructor_ap AS AP_INSTRUCTOR,
+                tbl_curso_usuario.curso_usuario_status AS ESTATUS_CURSO
                 FROM `tbl_curso_usuario`
                 INNER JOIN tbl_curso ON tbl_curso_usuario.curso_id = tbl_curso.curso_id
                 INNER JOIN tbl_usuario ON tbl_curso_usuario.usuario_id = tbl_usuario.usuario_id
@@ -185,12 +186,6 @@
                 WHERE tbl_curso_usuario.usuario_id = ?
                 LIMIT 10;
             ";
-
-            // $sql = $cn->prepare($sql);
-            // $sql->bindValue(1, $usuario_id);
-            // $sql->execute();
-            // return $resultado = $sql->fetchAll();
-
 
             $stmt = $cn->prepare($sql);
             $stmt->bindValue(1, $usuario_id);
