@@ -1,4 +1,4 @@
-// console.log("Ok");
+var usuario_id = $('#usuario_id').val();
 $(document).ready(function(){
     $('#tbl_cursos').DataTable({
         "aProcessing" : true,
@@ -13,13 +13,13 @@ $(document).ready(function(){
             url: "../../controller/UsuarioController.php?opcion=listar_cursos",
             type : "post",
             data : {
-                usuario_id : 2
+                usuario_id: usuario_id
             },
         },
         "bDestroy" : true,
         "responsive" : true,
         "bInfo" : true,
-        "iDisplayLength" : 10,
+        "iDisplayLength" : 15,
         "order" : [[0, "desc"]],
         "language" : {
             "sProcessing" :     "Procesando...",

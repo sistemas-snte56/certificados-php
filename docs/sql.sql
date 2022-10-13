@@ -35,3 +35,5 @@ INNER JOIN tbl_usuario ON tbl_curso_usuario.usuario_id = tbl_usuario.usuario_id
 INNER JOIN tbl_instructor ON tbl_curso.curso_id = tbl_instructor.instructor_id
 WHERE tbl_curso_usuario.usuario_id = 1;
 
+-- Contar registros
+SELECT COUNT(*) FROM `tbl_curso_usuario` WHERE usuario_id = 2;

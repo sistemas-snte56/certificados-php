@@ -12,9 +12,7 @@
         <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
           <span class="logged-name hidden-md-down">
             
-                <?php
-                    echo $_SESSION['usuario_id'];
-                    echo "&nbsp";                        
+                <?php                      
                     echo $_SESSION['usuario_name'];
                     echo "&nbsp";                        
                     echo $_SESSION['usuario_ap'];
