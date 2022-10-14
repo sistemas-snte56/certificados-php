@@ -25,6 +25,7 @@
           <span class="square-10 bg-success"></span>
         </a>
         <input type="hidden" name="usuario_idX" id="usuario_id" value=" <?php echo $_SESSION['usuario_id'] ?> ">
+        <input type="hidden" name="usuario_rolX" id="usuario_rol" value=" <?php echo $_SESSION['usuario_rol'] ?> ">
         <div class="dropdown-menu dropdown-menu-header wd-200">
           <ul class="list-unstyled user-profile-nav">
             <li><a href="../UsuPerfil/"><i class="icon ion-ios-gear"></i> Perfil</a></li>

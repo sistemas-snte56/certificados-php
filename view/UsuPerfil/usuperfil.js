@@ -36,5 +36,7 @@ $(document).on("click","#btnActualizar", function(){
         text: 'La información se actualizo con exito.',
         icon: 'success',
         confirmButtonText: 'Aceptar'
+    }).then(function(){
+        location.reload();
     })    
 });

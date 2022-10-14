@@ -38,6 +38,7 @@
                         $_SESSION["usuario_name"]=$resultado["usuario_name"];
                         $_SESSION["usuario_ap"]=$resultado["usuario_ap"];
                         $_SESSION["usuario_am"]=$resultado["usuario_am"];
+                        $_SESSION["usuario_rol"]=$resultado["usuario_rol"];
 
                         header('Location:'. Conectar::ruta() .'view/Usuhome');
                         exit();

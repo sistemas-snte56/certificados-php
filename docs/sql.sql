@@ -37,3 +37,14 @@ WHERE tbl_curso_usuario.usuario_id = 1;
 
 -- Contar registros
 SELECT COUNT(*) FROM `tbl_curso_usuario` WHERE usuario_id = 2;
+
+-- Consulta para mostrar todos los cursos de una persona y su categoría
+SELECT 
+CONCAT(tbl_usuario.usuario_name," ",tbl_usuario.usuario_ap," ",tbl_usuario.usuario_am) AS "NOMBRE DEL USUARIO",
+tbl_curso.curso_name AS "NOMBRE DEL CURSO" ,
+tbl_categoria.categoria_nombre AS "CATEGORÍA A LA QUE PERTENECE"
+FROM `tbl_curso_usuario` 
+INNER JOIN tbl_curso ON tbl_curso_usuario.curso_id = tbl_curso.curso_id
+INNER JOIN tbl_categoria on tbl_categoria.categoria_id = tbl_curso.curso_categoria_id
+INNER JOIN tbl_usuario on tbl_usuario.usuario_id = tbl_curso_usuario.usuario_id
+WHERE tbl_curso_usuario.usuario_id = 1;
