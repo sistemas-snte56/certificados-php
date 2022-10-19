@@ -55,7 +55,7 @@
         case "mostrar_curso" :
 
             # Almacenamos todo en una variable datos 
-            $datos = $curso -> get_curso_id ( $_POST["curso_id"] );
+            $datos = $curso -> get_curso_id( $_POST["curso_id"] );
 
             # Verificamos que lo que venga en $datos es un array y que sea mayor a 0
             if (is_array($datos) == true and count($datos) <> 0) {
@@ -63,13 +63,13 @@
                 #recorremos los datos y los guardamos en filas
                 foreach ($datos as $row) {
                     
-                    $_output["curso_id"] = $row["curso_id"];
-                    $_output["curso_categoria_id"] = $row["curso_categoria_id"];
-                    $_output["curso_name"] = $row["curso_name"];
-                    $_output["curso_descripcion"] = $row["curso_descripcion"];
-                    $_output["curso_fecha_inicial"] = $row["curso_fecha_inicial"];
-                    $_output["curso_fecha_final"] = $row["curso_fecha_final"];
-                    $_output["curso_instructor_id"] = $row["curso_instructor_id"];
+                    // $_output["curso_id"] = $row["curso_id"];
+                    // $_output["categoria_nombre"] = $row["categoria_nombre"];
+                    // $_output["curso_name"] = $row["curso_name"];
+                    // $_output["curso_descripcion"] = $row["curso_descripcion"];
+                    // $_output["curso_fecha_inicial"] = $row["curso_fecha_inicial"];
+                    // $_output["curso_fecha_final"] = $row["curso_fecha_final"];
+                    // $_output["instructor_name"] = $row["instructor_name"]       ;
 
                 }
 
@@ -88,21 +88,22 @@
         # Opción para mostrar y listar todos los cursos por consulta ID
         case "listar_curso" : 
 
-            $datos = $curso -> get_curso ($_POST["curso_id"]);
+            $datos = $curso -> get_curso ();
             $data = Array();
 
 
             foreach($datos as $row) {
                 $sub_array = array();
 
-                $sub_array[] = $row["curso_categoria_id"];
-                $sub_array[] = $row["curso_name"];
-                $sub_array[] = $row["curso_descripcion"];
+                $sub_array[] = $row["categoria_nombre"];
+                $sub_array[] = strtoupper($row["curso_name"]);
+                // $sub_array[] = $row["curso_descripcion"];
                 $sub_array[] = $row["curso_fecha_inicial"];
                 $sub_array[] = $row["curso_fecha_final"];
-                $sub_array[] = $row["curso_instructor_id"];
-                $sub_array[] = ' <button type="button" onClick="editar('.$row["curso_id"].');" id="'.$row["curso_id"].'" class="btn btn-outline-warning btn-icon"><div> <i class="fa fa-id-card-o"></i> </div></button> ';
-                $sub_array[] = ' <button type="button" onClick="eliminar('.$row["curso_id"].');" id="'.$row["curso_id"].'" class="btn btn-outline-danger btn-icon"><div> <i class="fa fa-id-card-o"></i> </div></button> ';
+                $sub_array[] = $row["instructor_name"] . " " . $row["instructor_ap"] . " " . $row["instructor_am"];
+                $sub_array[] = ' <button type="button" onClick="editar_curso('.$row["curso_id"].');" id="'.$row["curso_id"].'" class="btn btn-outline-warning btn-icon"><div> <i class="fa fa-edit"></i> </div></button> '
+                      . " " .  ' <button type="button" onClick="eliminar_curso('.$row["curso_id"].');" id="'.$row["curso_id"].'" class="btn btn-outline-danger btn-icon"><div> <i class="fa fa-trash"></i> </div></button> ';
+                // $sub_array[] = ' <button type="button" onClick="eliminar('.$row["curso_id"].');" id="'.$row["curso_id"].'" class="btn btn-outline-danger btn-icon"><div> <i class="fa fa-id-card-o"></i> </div></button> ';
                 $data[] = $sub_array;
             }
 

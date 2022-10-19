@@ -51,48 +51,48 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label">Nombre: <span class="tx-danger">*</span></label>
-                                        <input class="form-control" type="text" name="usuario_name" id="usuario_name" >
+                                        <input class="form-control" type="text" name="usuario_name" id="usuario_name" required >
                                     </div>
                                 </div><!-- col-4 -->
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label">Apellido Paterno: <span class="tx-danger">*</span></label>
-                                        <input class="form-control" type="text" name="usuario_ap" id="usuario_ap">
+                                        <input class="form-control" type="text" name="usuario_ap" id="usuario_ap" required >
                                     </div>
                                 </div><!-- col-4 -->
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label">Apellido Materno: <span class="tx-danger">*</span></label>
-                                        <input class="form-control" type="text" name="usuario_am" id="usuario_am">
+                                        <input class="form-control" type="text" name="usuario_am" id="usuario_am" required >
                                     </div>
                                 </div><!-- col-4 -->
 
                                 <div class="col-lg-3">
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label">Genero: <span class="tx-danger">*</span></label>
-                                        <select class="form-control select2" data-placeholder="Selecciona..."  name="usuario_genero" id="usuario_genero">
+                                        <select class="form-control select2" data-placeholder="Selecciona..."  name="usuario_genero" id="usuario_genero" required >
                                             <option label="Selecciona..."></option>
-                                            <option value="Mujer">Mujer</option>
-                                            <option value="Hombre">Hombre</option>
+                                            <option value="MUJER">MUJER</option>
+                                            <option value="HOMBRE">HOMBRE</option>
                                         </select>
                                     </div>
                                 </div><!-- col-3 -->
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label class="form-control-label">CURP: <span class="tx-danger">*</span></label>
-                                        <input class="form-control" type="text" name="usuario_curp" id="usuario_curp" >
+                                        <input class="form-control" type="text" name="usuario_curp" id="usuario_curp" required  >
                                     </div>
                                 </div><!-- col-3 -->
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label class="form-control-label">RFC: <span class="tx-danger">*</span></label>
-                                        <input class="form-control" type="text" name="usuario_rfc" id="usuario_rfc">
+                                        <input class="form-control" type="text" name="usuario_rfc" id="usuario_rfc" required >
                                     </div>
                                 </div><!-- col-3 -->
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label class="form-control-label">Teléfono: <span class="tx-danger">*</span></label>
-                                        <input class="form-control" type="text" name="usuario_telefono" id="usuario_telefono">
+                                        <input class="form-control" type="text" name="usuario_telefono" id="usuario_telefono" required >
                                     </div>
                                 </div><!-- col-12 -->
 
@@ -106,19 +106,19 @@
                                 <div class="col-lg-4">
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label">Correo electrónico: <span class="tx-danger">*</span></label>
-                                        <input class="form-control" type="text" name="usuario_email" id="usuario_email">
+                                        <input class="form-control" type="text" name="usuario_email" id="usuario_email" required >
                                     </div>
                                 </div><!-- col-4 -->
                                 <div class="col-lg-4">
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label">Número de personal: <span class="tx-danger">*</span></label>
-                                        <input class="form-control" type="text" name="usuario_npersonal" id="usuario_npersonal">
+                                        <input class="form-control" type="text" name="usuario_npersonal" id="usuario_npersonal" required >
                                     </div>
                                 </div><!-- col-4 -->
                                 <div class="col-lg-4">
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label">Nivel educativo: <span class="tx-danger">*</span></label>
-                                        <select class="form-control select2" data-placeholder="Selecciona..."  name="usuario_nivel" id="usuario_nivel">
+                                        <select class="form-control select2" data-placeholder="Selecciona..."  name="usuario_nivel" id="usuario_nivel" required >
                                             <option label="Selecciona..."></option>
                                             <option value="Preescolar">Preescolar</option>
                                             <option value="Primaria">Primaria</option>
