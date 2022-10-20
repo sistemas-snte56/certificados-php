@@ -1,22 +1,22 @@
 var usuario_id = $('#usuario_id').val();
 
-function init(){
-    $( "#cursos_form" ).on("submit", function(e){
+function init() {
+    $("#cursos_form").on("submit", function (e) {
         guardar_editar(e);
     });
 }
 
-function guardar_editar (e) {
+function guardar_editar(e) {
     e.preventDefault();
     var formData = new FormData($("#cursos_form")[0]);
     $.ajax({
-        url : '../../controller/CursoController.php?opcion=guardar_curso',
-        type : 'POST',
-        data : formData,
-        contentType : false,
-        processData : false,
-        success : function (data) {
-            
+        url: '../../controller/CursoController.php?opcion=guardar_curso',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+
             $('#modal_ncurso').modal('hide');
 
             Swal.fire({
@@ -27,8 +27,8 @@ function guardar_editar (e) {
             }).then(function () {
                 // location.reload();
                 $('#tbl_cursos').DataTable().ajax.reload();
-            }) 
-        } 
+            })
+        }
     });
 
 }
@@ -37,7 +37,7 @@ $(document).ready(function () {
 
     // Llamamos a la función combo_box
     combo_categoria();
-    
+
     // Llamamos a la funcion combo_box
     combo_instructor();
 
@@ -67,7 +67,7 @@ $(document).ready(function () {
         "bDestroy": true,
         "responsive": true,
         "bInfo": true,
-        "iDisplayLength": 5,
+        "iDisplayLength": 20,
         "order": [[0, "desc"]],
         "language": {
             "sProcessing": "Procesando...",
@@ -104,7 +104,7 @@ function editar_curso(curso_id) {
         data = JSON.parse(data);
 
         console.log(data);
-        
+
         $('#curso_id').val(data.curso_id);
         $('#curso_categoria_id').val(data.curso_categoria_id).trigger('change');
         $('#curso_name').val(data.curso_name);
@@ -143,13 +143,13 @@ function eliminar_curso(curso_id) {
         confirmButtonText: 'Si, deseo borrarlo'
     }).then((result) => {
         if (result.isConfirmed) {
-            
-                    
-            
+
+
+
             $.post("../../controller/CursoController.php?opcion=eliminar_curso", { curso_id: curso_id }, function (data) {
                 $('#tbl_cursos').DataTable().ajax.reload();
-                
-                
+
+
                 Swal.fire(
                     'Curso eliminado',
                     'La información del curso ha sido eliminada.',
@@ -160,7 +160,7 @@ function eliminar_curso(curso_id) {
             });
 
         }
-    })    
+    })
 }
 
 function combo_categoria() {

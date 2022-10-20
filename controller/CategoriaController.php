@@ -12,113 +12,91 @@
     # Opciones de solicitud por le programador
     switch ($_GET["opcion"]) {
 
-        // # Opción para Guardar y Editar
-        // case "guardar_curso" : 
+        # Opción para Guardar y Editar las categorías
+        case "guardar_categoria" : 
 
-        //     /**
-        //      *  Guardar y Editar
-        //      *  Validamos no exista ID de curso y se guarde como dato nuevo
-        //      *  Si existe un ID de curso solamente se tiene que actualizar 
-        //      */
+            /**
+             *  Guardar y Editar
+             *  Validamos no exista ID de categoria y se guarde como dato nuevo
+             *  Si existe un ID de categoria solamente se tiene que actualizar 
+             */
 
-        //     # Preguntamos principalmente si curso_id esta vacio
-        //     if (empty($_POST["curso_id"])) {
+            # Preguntamos principalmente si categoria_id esta vacio
+            if (empty($_POST["categoria_id"])) {
 
-        //         # Si viene vacio principalmente registramos la información
-        //         $curso -> insert_curso (
-        //             $_POST["curso_categoria_id"], 
-        //             $_POST["curso_name"], 
-        //             $_POST["curso_descripcion"], 
-        //             $_POST["curso_fecha_inicial"], 
-        //             $_POST["curso_fecha_final"], 
-        //             $_POST["curso_instructor_id"]
-        //         );
+                # Si viene vacio registramos la información
+                $categorias->insert_categoria(
+                    $_POST["categoria_nombre"], 
+                );
 
-        //     } else {
+            } else {
                 
-        //         # Si ya hay registro de el actualizaremos la información agregando un parametro mas que es curos_id
-        //         $curso -> update_curso(
-        //             $_POST["curso_id"],
-        //             $_POST["curso_categoria_id"], 
-        //             $_POST["curso_name"], 
-        //             $_POST["curso_descripcion"], 
-        //             $_POST["curso_fecha_inicial"], 
-        //             $_POST["curso_fecha_final"], 
-        //             $_POST["curso_instructor_id"]
-        //         );
-        //     }
+                # Si ya hay registro actualizaremos la información agregando un parametro mas que es categoria_id
+                $categorias -> update_categoria(
+                    $_POST["categoria_id"],
+                    $_POST["categoria_nombre"], 
+                );
+            }
             
             
-        //     break;
+            break;
         
-        // # Opción para mostrar toda la información segun el ID que se este enviando
-        // case "mostrar_curso" :
+        # Opción la información de la categoria seleccionada para actualizarla
+        case "mostrar_categoria" :
 
-        //     # Almacenamos todo en una variable datos 
-        //     $datos = $curso -> get_curso_id ( $_POST["curso_id"] );
+            # Almacenamos todo en una variable datos 
+            $datos = $categorias -> get_categoria_id ( $_POST["categoria_id"] );
 
-        //     # Verificamos que lo que venga en $datos es un array y que sea mayor a 0
-        //     if (is_array($datos) == true and count($datos) <> 0) {
+            # Verificamos que lo que venga en $datos es un array y que sea mayor a 0
+            if (is_array($datos) == true and count($datos) <> 0) {
                 
-        //         #recorremos los datos y los guardamos en filas
-        //         foreach ($datos as $row) {
+                #recorremos los datos y los guardamos en filas
+                foreach ($datos as $row) {
                     
-        //             $_output["curso_id"] = $row["curso_id"];
-        //             $_output["curso_categoria_id"] = $row["curso_categoria_id"];
-        //             $_output["curso_name"] = $row["curso_name"];
-        //             $_output["curso_descripcion"] = $row["curso_descripcion"];
-        //             $_output["curso_fecha_inicial"] = $row["curso_fecha_inicial"];
-        //             $_output["curso_fecha_final"] = $row["curso_fecha_final"];
-        //             $_output["curso_instructor_id"] = $row["curso_instructor_id"];
+                    // $_output["categoria_id"] = $row["categoria_id"];
+                    // $_output["categoria_nombre"] = $row["categoria_nombre"];
 
-        //         }
+                }
 
-        //         echo json_encode($datos);
-        //     }
+                echo json_encode($datos);
+            }
 
-        //     break;
+            break;
 
-        // # Opción para eliminar curso
-        // case "eliminar_curso" :
+        # Opción para eliminar curso
+        case "eliminar_categoria" :
 
-        //     $curso -> delete_curso ( $_POST["curso_id"] );
+            $categorias -> delete_categoria ( $_POST["categoria_id"] );
 
-        //     break;
+            break;
 
-        // # Opción para mostrar y listar todos los cursos por consulta ID
-        // case "listar_categorias" : 
+        # Opción para mostrar y listar todas las categorias en la pagina principal de mantenimiento categorías
+        case "listar_categorias" : 
 
-        //     $datos = $categorias -> get_categorias ();
-        //     $data = Array();
+            $datos = $categorias -> get_categorias ();
+            $data = Array();
 
+            foreach($datos as $row) {
+                $sub_array = array();
 
-        //     foreach($datos as $row) {
-        //         $sub_array = array();
+                $sub_array[] = $row["categoria_nombre"];
+                $sub_array[] = ' <button type="button" onClick="editar_categoria('.$row["categoria_id"].');" id="'.$row["categoria_id"].'" class="btn btn-outline-warning btn-icon"><div> <i class="fa fa-edit"></i> </div></button> ';
+                $sub_array[] = ' <button type="button" onClick="eliminar_categoria('.$row["categoria_id"].');" id="'.$row["categoria_id"].'" class="btn btn-outline-danger btn-icon"><div> <i class="fa fa-trash"></i> </div></button> ';
+                $data[] = $sub_array;
+            }
 
-        //         $sub_array[] = $row["curso_categoria_id"];
-        //         $sub_array[] = $row["curso_name"];
-        //         // $sub_array[] = $row["curso_descripcion"];
-        //         $sub_array[] = $row["curso_fecha_inicial"];
-        //         $sub_array[] = $row["curso_fecha_final"];
-        //         $sub_array[] = $row["curso_instructor_id"];
-        //         $sub_array[] = ' <button type="button" onClick="editar_curso('.$row["curso_id"].');" id="'.$row["curso_id"].'" class="btn btn-outline-warning btn-icon"><div> <i class="fa fa-edit"></i> </div></button> '
-        //               . " " .  ' <button type="button" onClick="eliminar_curso('.$row["curso_id"].');" id="'.$row["curso_id"].'" class="btn btn-outline-danger btn-icon"><div> <i class="fa fa-trash"></i> </div></button> ';
-        //         // $sub_array[] = ' <button type="button" onClick="eliminar('.$row["curso_id"].');" id="'.$row["curso_id"].'" class="btn btn-outline-danger btn-icon"><div> <i class="fa fa-id-card-o"></i> </div></button> ';
-        //         $data[] = $sub_array;
-        //     }
+            $results = array(
+                "sEcho" => 1,
+                "TotalRecords" => count($data),
+                "iTotalDisplayRecords" => count($data),
+                "aaData" => $data
+            );
 
-        //     $results = array(
-        //         "sEcho" => 1,
-        //         "TotalRecords" => count($data),
-        //         "iTotalDisplayRecords" => count($data),
-        //         "aaData" => $data
-        //     );
+            echo json_encode($results);
 
-        //     echo json_encode($results);
+            break;
 
-        //     break;
-
-        # Opción para mostrar y listar todos las categorias en un combobox
+        # Opción para mostrar y listar todos las categorías en un combobox para la página Cursos
         case "combobox_categorias" : 
 
             $datos = $categorias -> get_categorias();
