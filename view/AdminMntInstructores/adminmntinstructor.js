@@ -106,7 +106,7 @@ function editar_instructor(instructor_id) {
     $.post("../../controller/InstructorController.php?opcion=mostrar_instructor", { instructor_id: instructor_id }, function (data) {
         data = JSON.parse(data);
 
-        $('#instructor_id').val(data.instructor_id);
+        // $('#instructor_id').val(data.instructor_id);
         $('#instructor_name').val(data.instructor_name);
         $('#instructor_ap').val(data.instructor_ap);
         $('#instructor_am').val(data.instructor_am);
