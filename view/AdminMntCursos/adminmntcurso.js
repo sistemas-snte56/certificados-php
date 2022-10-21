@@ -175,7 +175,7 @@ function combo_categoria() {
 function combo_instructor() {
 
     // Mandamos a llamar el listado de Instructores para insertarlo en el combobox
-    $.post("../../controller/InstrucorController.php?opcion=combobox_instructores", function (data) {
+    $.post("../../controller/InstructorController.php?opcion=combobox_instructores", function (data) {
         $('#curso_instructor_id').html(data);
     });
 

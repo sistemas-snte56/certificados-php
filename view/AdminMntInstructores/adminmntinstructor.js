@@ -1,23 +1,24 @@
 var usuario_id = $('#usuario_id').val();
 
 function init() {
-    $("#categorias_form").on("submit", function (e) {
+    $("#instructores_form").on("submit", function (e) {
         guardar_editar(e);
     });
 }
 
 function guardar_editar(e) {
     e.preventDefault();
-    var formData = new FormData($("#categorias_form")[0]);
+    var formData = new FormData($("#instructores_form")[0]);
     $.ajax({
-        url: '../../controller/CategoriaController.php?opcion=guardar_categoria',
+        url: '../../controller/InstructorController.php?opcion=guardar_instructor',
         type: 'POST',
         data: formData,
         contentType: false,
         processData: false,
         success: function (data) {
 
-            $('#modal_ncategorias').modal('hide');
+            $('#modal_ninstructor').modal('hide');
+
             Swal.fire({
                 title: 'Actualizado',
                 text: 'El registro se realizó con exito.',
@@ -25,7 +26,7 @@ function guardar_editar(e) {
                 confirmButtonText: 'Aceptar'
             }).then(function () {
                 // location.reload();
-                $('#tbl_categorias').DataTable().ajax.reload();
+                $('#tbl_instructores').DataTable().ajax.reload();
             })
         }
     });
@@ -34,7 +35,12 @@ function guardar_editar(e) {
 
 $(document).ready(function () {
 
-    $('#tbl_categorias').DataTable({
+    $('#instructor_genero').select2({
+        dropdownParent: $('#modal_ninstructor')
+    });
+
+
+    $('#tbl_instructores').DataTable({
         "aProcessing": true,
         "aServerSide": true,
         dom: 'Bfrtip',
@@ -44,7 +50,7 @@ $(document).ready(function () {
             'csvHtml5',
         ],
         "ajax": {
-            url: "../../controller/CategoriaController.php?opcion=listar_categorias",
+            url: "../../controller/InstructorController.php?opcion=listar_instructor",
             type: "post"
         },
         "bDestroy": true,
@@ -81,34 +87,45 @@ $(document).ready(function () {
 });
 
 
-function nueva_categoria() {
 
-    $('#categorias_id').val('');
+function nuevo_instructor() {
+    $("#instructor_id").val('');
     $('#lbl_titulo').html('NUEVO REGISTRO');
-    $('#categorias_form')[0].reset();
-    $('#modal_ncategorias').modal('show');
+    $('#instructores_form')[0].reset();
+    $('#modal_ninstructor').modal('show');
+    $('#instructor_genero').val('');
 }
 
-function editar_categoria(categoria_id) {
 
-    console.log('Bonton editar - ID: ' + categoria_id);
 
-    // Solicitamos al controlador mandar la información de la categoría seleccionada
-    $.post("../../controller/CategoriaController.php?opcion=mostrar_categoria", { categoria_id: categoria_id }, function (data) {
+function editar_instructor(instructor_id) {
+
+    console.log(instructor_id);
+
+    // Mandamos a llamar el listado de Categorias para insertarlo en el combobox
+    $.post("../../controller/InstructorController.php?opcion=mostrar_instructor", { instructor_id: instructor_id }, function (data) {
         data = JSON.parse(data);
 
-        $('#categoria_id').val(data.categoria_id);
-        $('#categoria_nombre').val(data.categoria_nombre);
+        $('#instructor_id').val(data.instructor_id);
+        $('#instructor_name').val(data.instructor_name);
+        $('#instructor_ap').val(data.instructor_ap);
+        $('#instructor_am').val(data.instructor_am);
+        $('#instructor_email').val(data.instructor_email);
+        $('#instructor_genero').val(data.instructor_genero).trigger('change');
+        $('#instructor_telefono').val(data.instructor_telefono);
 
     });
 
     $('#lbl_titulo').html('ACTUALIZAR REGISTRO');
-    $('#modal_ncategorias').modal('show');
+    $('#modal_ninstructor').modal('show');
 }
 
-function eliminar_categoria(categoria_id) {
+
+
+function eliminar_instructor(instructor_id) {
+    console.log(instructor_id);
     Swal.fire({
-        title: '¿Eliminar curso?',
+        title: '¿Eliminar instructor?',
         text: "¡No podrás revertir esto!",
         icon: 'warning',
         showCancelButton: true,
@@ -119,12 +136,12 @@ function eliminar_categoria(categoria_id) {
     }).then((result) => {
         if (result.isConfirmed) {
 
-            $.post("../../controller/CategoriaController.php?opcion=eliminar_categoria", { categoria_id: categoria_id }, function (data) {
-                $('#tbl_categorias').DataTable().ajax.reload();
+            $.post("../../controller/InstructorController.php?opcion=eliminar_instructor", { instructor_id: instructor_id }, function (data) {
+                $('#tbl_instructores').DataTable().ajax.reload();
 
                 Swal.fire(
-                    'categoria eliminado',
-                    'La información del categoria ha sido eliminada.',
+                    'instructor eliminado',
+                    'La información del instructor ha sido eliminada.',
                     'success'
                 )
 
