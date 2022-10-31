@@ -58,24 +58,32 @@
             $datos = $instructor -> get_instructor_id ( $_POST["instructor_id"] );
 
             # Verificamos que lo que venga en $datos es un array y que sea mayor a 0
-            if (is_array($datos) == true and count($datos) <> 0) {
+            if ( is_array($datos) == true and count($datos)<>0 ) {
                 
                 #recorremos los datos y los guardamos en filas
                 foreach ($datos as $row) {
               
-                    // $_output["instructor_name"] = $row["instructor_name"];
-                    // $_output["instructor_ap"] = $row["instructor_ap"];
-                    // $_output["instructor_am"] = $row["instructor_am"];
-                    // $_output["instructor_email"] = $row["instructor_email"];
-                    // $_output["instructor_genero"] = $row["instructor_genero"];
-                    // $_output["instructor_telefono"] = $row["instructor_telefono"];
+                    $output["instructor_id"] = $row["instructor_id"];
+                    $output["instructor_name"] = $row["instructor_name"];
+                    $output["instructor_ap"] = $row["instructor_ap"];
+                    $output["instructor_am"] = $row["instructor_am"];
+                    $output["instructor_email"] = $row["instructor_email"];
+                    $output["instructor_genero"] = $row["instructor_genero"];
+                    $output["instructor_telefono"] = $row["instructor_telefono"];
 
                 }
 
-                echo json_encode($datos);
+                echo json_encode($output);
             }
 
             break;
+
+foreach ($rows as $row) {
+    if(is_array($row)){
+        echo $row["name"]. "\n";
+    }
+}
+
 
         # Opción para eliminar instructor
         case "eliminar_instructor" :

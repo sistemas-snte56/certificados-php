@@ -124,7 +124,7 @@
             $stmt = $cn->prepare($sql);
             $stmt -> bindValue ( 1, $instructor_id);
             $stmt -> execute();
-            return $resultado = $stmt->fetch();
+            return $resultado = $stmt->fetchAll();
         }
 
     }

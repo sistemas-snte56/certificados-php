@@ -260,6 +260,241 @@
 
         }
 
+
+        # Obtener Regiones de Combobox
+        public function get_regiones($region_id){
+            $cn = parent::conexion();
+            parent::set_names();
+
+            # Preparando la consulta SQL para mostrar los cursos que corresponden a un usuario
+            $sql = "SELECT
+                    tbl_delegacion.`delegacion_id`AS 'ID',
+                    tbl_delegacion.delegacion_name AS 'DELEGACION'
+                    # tbl_region.region_name AS 'REGION'
+                    FROM `tbl_region_delegacion` 
+                    INNER JOIN tbl_delegacion ON tbl_delegacion.delegacion_id = tbl_region_delegacion.region_delegacion_delegacion_id
+                    INNER JOIN tbl_region ON tbl_region.region_id = tbl_region_delegacion.region_delegacion_region_id
+                    WHERE `region_delegacion_region_id` = ?;
+            ";
+
+            // $sql = $cn->prepare($sql);
+            // $sql->bindValue(1, $region_id);
+            // $sql->execute();
+            // return $resultado = $sql->fetchAll();
+
+
+            $stmt = $cn->prepare($sql);
+            $stmt->bindValue(1, $region_id);
+            $stmt->execute();
+            return $resultado = $stmt->fetchAll();
+
+        }
+
+
+
+
+
+
+
+
+
+        /**
+         *  CRUD PARA USUARIO
+         */
+
+        
+        # Inertar nuevo usuario
+        public function insert_usuario(
+            $usuario_name,
+            $usuario_ap,
+            $usuario_am,
+            $usuario_curp,
+            $usuario_rfc,
+            $usuario_genero,
+            $usuario_rol,
+            $usuario_telefono,
+            $usuario_email,
+            $usuario_npersonal,
+            $usuario_pwd,
+            $usuario_region,
+            $usuario_delegacion,
+            $usuario_folio,
+            $usuario_tituloConstancia,
+            $usuario_observacion){
+          
+            $cn = parent::conexion();
+            parent::set_names();
+            
+            # Insertar un nuevo Usuario
+            $sql = "INSERT 
+                    INTO `tbl_usuario` (
+                        `usuario_id`,
+                        `usuario_name`,
+                        `usuario_ap`,
+                        `usuario_am`,
+                        `usuario_curp`,
+                        `usuario_rfc`,
+                        `usuario_genero`,
+                        `usuario_rol`,
+                        `usuario_telefono`,
+                        `usuario_email`,
+                        `usuario_npersonal`,
+                        `usuario_pwd`,
+                        `usuario_nivel`,
+                        `usuario_region`,
+                        `usuario_delegacion`,
+                        `usuario_folio`,
+                        `usuario_fecha`,
+                        `usuario_tituloConstancia`,
+                        `usuario_observacion`,
+                        `usuario_fechaCracion`,
+                        `usuario_status`) 
+                    VALUES (NULL, ?, ?, ?, ?, ?, ?,'1',?,?,?,?,?,?,?,?,now(),?,?,now(),'1');";
+
+            $stmt = $cn->prepare($sql);
+
+            $stmt -> bindValue (1, $usuario_name);
+            $stmt -> bindValue (2, $usuario_ap);
+            $stmt -> bindValue (3, $usuario_am);
+            $stmt -> bindValue (4, $usuario_curp);
+            $stmt -> bindValue (5, $usuario_rfc);
+            $stmt -> bindValue (6, $usuario_genero);
+            $stmt -> bindValue (7, $usuario_telefono);
+            $stmt -> bindValue (8, $usuario_email);
+            $stmt -> bindValue (9, $usuario_npersonal);
+            $stmt -> bindValue (10, $usuario_pwd);
+            $stmt -> bindValue (11, $usuario_nivel);
+            $stmt -> bindValue (12, $usuario_region);
+            $stmt -> bindValue (13, $usuario_delegacion);
+            $stmt -> bindValue (14, $usuario_folio);
+            $stmt -> bindValue (15, $usuario_tituloConstancia);
+            $stmt -> bindValue (16, $usuario_observacion);
+
+            $stmt->execute();
+
+            return $resultado = $stmt->fetchAll();
+
+        }
+
+        # Actualiza la información del usuario
+        public function update_usuario(
+            $usuario_id,
+            $usuario_name,
+            $usuario_ap,
+            $usuario_am,
+            $usuario_curp,
+            $usuario_rfc,
+            $usuario_genero,
+            $usuario_rol,
+            $usuario_telefono,
+            $usuario_email,
+            $usuario_npersonal,
+            $usuario_pwd,
+            $usuario_region,
+            $usuario_delegacion,
+            $usuario_folio,
+            $usuario_tituloConstancia,
+            $usuario_observacion){
+        
+            $cn = parent::conexion();
+            parent::set_names();
+            
+            # Consulta para actualizar toda la información del usuario
+            $sql = "UPDATE `tbl_usuario`
+                    SET 
+
+                        usuario_name = ?,
+                        usuario_ap = ?,
+                        usuario_am = ?,
+                        usuario_curp = ?,
+                        usuario_rfc = ?,
+                        usuario_genero = ?,
+                        usuario_rol = ?,
+                        usuario_telefono = ?,
+                        usuario_email = ?,
+                        usuario_npersonal = ?,
+                        usuario_pwd = ?,
+                        usuario_region = ?,
+                        usuario_delegacion = ?,
+                        usuario_folio = ?,
+                        usuario_tituloConstancia = ?,
+                        usuario_observacion = ?
+
+                    WHERE 
+                        usuario_id = ? 
+                    ";
+
+            $stmt -> bindValue (1, $usuario_name);
+            $stmt -> bindValue (2, $usuario_ap);
+            $stmt -> bindValue (3, $usuario_am);
+            $stmt -> bindValue (4, $usuario_curp);
+            $stmt -> bindValue (5, $usuario_rfc);
+            $stmt -> bindValue (6, $usuario_genero);
+            $stmt -> bindValue (7, $usuario_rol);
+            $stmt -> bindValue (8, $usuario_telefono);
+            $stmt -> bindValue (9, $usuario_email);
+            $stmt -> bindValue (10, $usuario_npersonal);
+            $stmt -> bindValue (11, $usuario_pwd);
+            $stmt -> bindValue (12, $usuario_region);
+            $stmt -> bindValue (13, $usuario_delegacion);
+            $stmt -> bindValue (14, $usuario_folio);
+            $stmt -> bindValue (15, $usuario_tituloConstancia);
+            $stmt -> bindValue (16, $usuario_observacion);            
+            $stmt -> bindValue (17, $usuario_id);
+
+
+            $stmt->execute();
+            return $resultado = $stmt->fetchAll();           
+
+        }
+
+        #Elimina un Usuario
+        public function delete_usuario($usuario_id){
+
+            $cn = parent::conexion();
+            parent::set_names();
+
+            # Consulta para mostrar toda la información del usuario
+            $sql = "UPDATE `tbl_usuario` SET tbl_usuario.usuario_status = 0 WHERE tbl_usuario.usuario_id = ?";
+            $stmt = $cn->prepare($sql);
+            $stmt -> bindValue ( 1, $usuario_id);
+            $stmt->execute();
+            return $resultado = $stmt->fetchAll();
+        }
+
+        # Funcion para mostrar la lista de todos los usuarios en la página de mantenimientos de usuarios
+        public function get_usuarios(){
+            $cn = parent::conexion();
+            parent::set_names();
+
+            # Consulta para mostrar toda la información del usuarios
+            $sql = "SELECT * FROM `tbl_usuario` WHERE tbl_usuario.usuario_status = 1;";
+
+            $stmt = $cn->prepare($sql);
+            $stmt->execute();
+            return $resultado = $stmt->fetchAll();
+        }         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
 ?>

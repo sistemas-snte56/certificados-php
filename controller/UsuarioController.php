@@ -160,26 +160,6 @@
 
         # Actualizar datos de perfil
         case 'update_perfil' :
-            /*$usuario -> update_usuario_perfil (
-                    $_POST["usuario_id"],
-                    $_POST["usuario_name"],
-                    $_POST["usuario_ap"],
-                    $_POST["usuario_am"],
-                    $_POST["usuario_genero"],
-                    $_POST["usuario_curp"],
-                    $_POST["usuario_rfc"],
-                    $_POST["usuario_telefono"],
-                    $_POST["usuario_email"],
-                    $_POST["usuario_npersonal"],
-                    $_POST["usuario_nivel"]
-            );
-
-
-            break;*/
-
-
-
-
 
             $usuario -> update_usuario_perfil ( 
                     $_POST["usuario_id"],
@@ -195,23 +175,124 @@
                     $_POST["usuario_nivel"]
             );
 
+            break;
 
 
+        # Opción para Guardar y Editar
+        case "guardar_usuario" : 
 
+            /**
+             *  Guardar y Editar
+             *  Validamos no exista ID de usuario y se guarde como dato nuevo
+             *  Si existe un ID de usuario solamente se tiene que actualizar 
+             */
 
+            # Preguntamos principalmente si usuario_id esta vacio
+            if (empty($_POST["usuario_id"])) {
 
+                # Si el ID usuario viene vacio registramos la información
+                $usuario -> insert_usuario (
 
+                    $_POST["usuario_name"],
+                    $_POST["usuario_ap"],
+                    $_POST["usuario_am"],
+                    $_POST["usuario_curp"],
+                    $_POST["usuario_rfc"],
+                    $_POST["usuario_genero"],
+                    $_POST["usuario_rol"],
+                    $_POST["usuario_telefono"],
+                    $_POST["usuario_email"],
+                    $_POST["usuario_npersonal"],
+                    $_POST["usuario_pwd"],
+                    $_POST["usuario_region"],
+                    $_POST["usuario_delegacion"],
+                    $_POST["usuario_folio"],
+                    $_POST["usuario_tituloConstancia"],
+                    $_POST["usuario_observacion"]
+                    
+                );
+                
+            } else {
+                
+                # Si ya hay registro actualizaremos la información agregando un parametro mas que es usuario_id
+                $usuario -> update_usuario(
+                    $_POST["usuario_id"],
+                    $_POST["usuario_name"],
+                    $_POST["usuario_ap"],
+                    $_POST["usuario_am"],
+                    $_POST["usuario_curp"],
+                    $_POST["usuario_rfc"],
+                    $_POST["usuario_genero"],
+                    $_POST["usuario_rol"],
+                    $_POST["usuario_telefono"],
+                    $_POST["usuario_email"],
+                    $_POST["usuario_npersonal"],
+                    $_POST["usuario_pwd"],
+                    $_POST["usuario_region"],
+                    $_POST["usuario_delegacion"],
+                    $_POST["usuario_folio"],
+                    $_POST["usuario_tituloConstancia"],
+                    $_POST["usuario_observacion"]
+                );
+            }
+                    
+            break;
 
+        # Opción para eliminar usuario
+        case "eliminar_usuario" :
 
+            $usuario -> delete_usuario ( $_POST["usuario_id"] );
 
+            break;
 
+        case "listar_usuario" : 
 
+            $datos = $usuario -> get_usuarios ();
+            $data = Array();
 
+            foreach($datos as $row) {
+                $sub_array = array();
 
+                $sub_array[] = $row["usuario_name"] . " " . $row["usuario_ap"] . " " . $row["usuario_am"] ;
+                $sub_array[] = $row["usuario_email"];
+                $sub_array[] = $row["usuario_genero"];
+                $sub_array[] = $row["usuario_telefono"];
 
+                $sub_array[] = ' <button type="button" onClick="editar_usuario('.$row["usuario_id"].');" id="'.$row["usuario_id"].'" class="btn btn-outline-warning btn-icon"><div> <i class="fa fa-edit"></i> </div></button> '
+                      . " " .  ' <button type="button" onClick="eliminar_usuario('.$row["usuario_id"].');" id="'.$row["usuario_id"].'" class="btn btn-outline-danger btn-icon"><div> <i class="fa fa-trash"></i> </div></button> ';
+                $data[] = $sub_array;
+            }
 
+            $results = array(
+                "sEcho" => 1,
+                "TotalRecords" => count($data),
+                "iTotalDisplayRecords" => count($data),
+                "aaData" => $data
+            );
 
+            echo json_encode($results);
 
+            break;
+
+        # Mostrar todas las regiones en un combobox
+        case 'cmb_regiones' :
+   
+            $datos = $usuario -> get_regiones($_POST["usuario_region"]);
+            $data = Array();
+
+            /*
+            if (is_array($datos) == true AND count($datos)>0) {
+
+                $html = "<option label='¿Selecciona Region?'></option>";
+
+                foreach($datos as $row) {
+                    $html.= "<option value='". $row['categoria_id'] ."'> " . $row['categoria_nombre'] . " </option>";
+                }
+
+                echo $html;
+            }*/
+
+            break;
 
 
     }
