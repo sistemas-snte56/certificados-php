@@ -48,6 +48,7 @@ if (isset($_SESSION["usuario_id"])) {?>
                                         <th>EMAIL</th>
                                         <th>GENERO</th>
                                         <th>TELÉFONO</th>
+                                        <th>ROL</th>
                                         <th>EDICIÓN</th>
                                     </tr>
                                 </thead>
@@ -60,6 +61,7 @@ if (isset($_SESSION["usuario_id"])) {?>
                                         <th>EMAIL</th>
                                         <th>GENERO</th>
                                         <th>TELÉFONO</th>
+                                        <th>ROL</th>
                                         <th>EDICIÓN</th>
                                     </tr>
                                 </tfoot>

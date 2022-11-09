@@ -292,17 +292,11 @@
 
 
 
-
-
-
-
-
-
         /**
          *  CRUD PARA USUARIO
          */
 
-        
+/*        
         # Inertar nuevo usuario
         public function insert_usuario(
             $usuario_name,
@@ -474,27 +468,263 @@
             $stmt->execute();
             return $resultado = $stmt->fetchAll();
         }         
+*/
+
+        /**************************************** */
 
 
+        # Inertar curso
+        public function insert_usuario(
+            
+                        $usuario_name,
+                        $usuario_ap,
+                        $usuario_am,
+                        //$usuario_curp,
+                        //$usuario_rfc,
+                        $usuario_genero,
+                        $usuario_rol,
+                        $usuario_telefono,
+                        $usuario_email,
+                        $usuario_npersonal,
+                        $usuario_pwd,
+                        $usuario_nivel
+                        // $usuario_region,
+                        // $usuario_delegacion,
+                        // $usuario_folio,
+                        // $usuario_fecha,
+                        // $usuario_tituloConstancia,
+                        // $usuario_observacion,
+                        // $usuario_fechaCracion,
+                        // $usuario_status
+                        ){
+
+            $cn = parent::conexion();
+            parent::set_names();
+            
+            # Consulta para insertar un nuevo registro a la tabla usuario 
+            // $sql = "INSERT INTO `tbl_usuario` (`usuario_id`, `usuario_nombre`, `usuario_fecha`, `usuario_status`) VALUES (NULL, ?, now(), '1');";
+            /*$sql = "INSERT 
+                    INTO `tbl_usuario` (
+                        `usuario_id`,
+                        `usuario_name`,
+                        `usuario_ap`,
+                        `usuario_am`,
+                        `usuario_curp`,
+                        `usuario_rfc`,
+                        `usuario_genero`,
+                        `usuario_rol`,
+                        `usuario_telefono`,
+                        `usuario_email`,
+                        `usuario_npersonal`,
+                        `usuario_pwd`,
+                        `usuario_nivel`,
+                        `usuario_region`,
+                        `usuario_delegacion`,
+                        `usuario_folio`,
+                        `usuario_fecha`,
+                        `usuario_tituloConstancia`,
+                        `usuario_observacion`,
+                        `usuario_fechaCracion`,
+                        `usuario_status`) 
+                    VALUES (NULL, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,now(),'1');";*/
+
+            $sql = "INSERT 
+                    INTO `tbl_usuario` (
+                        `usuario_id`,
+                        `usuario_name`,
+                        `usuario_ap`,
+                        `usuario_am`,
+                        -- `usuario_curp`,
+                        -- `usuario_rfc`,
+                        `usuario_genero`,
+                        `usuario_rol`,
+                        `usuario_telefono`,
+                        `usuario_email`,
+                        `usuario_npersonal`,
+                        `usuario_pwd`,
+                        `usuario_nivel`,
+                        -- `usuario_region`,
+                        -- `usuario_delegacion`,
+                        -- `usuario_folio`,
+                        `usuario_fecha`,
+                        -- `usuario_tituloConstancia`,
+                        -- `usuario_observacion`,
+                        `usuario_fechaCracion`,
+                        `usuario_status`
+                        
+                        ) 
+                    VALUES (NULL, ?,?,?,?,?,?,?,?,?,?,now(),now(),'1');";
+
+            $stmt = $cn->prepare($sql);
+            /*$stmt -> bindValue (1, $usuario_name);
+            $stmt -> bindValue (2, $usuario_ap);
+            $stmt -> bindValue (3, $usuario_am);
+            $stmt -> bindValue (4, $usuario_curp);
+            $stmt -> bindValue (5, $usuario_rfc);
+            $stmt -> bindValue (6, $usuario_genero);
+            $stmt -> bindValue (7, $usuario_rol);
+            $stmt -> bindValue (8, $usuario_telefono);
+            $stmt -> bindValue (9, $usuario_email);
+            $stmt -> bindValue (10, $usuario_npersonal);
+            $stmt -> bindValue (11, $usuario_pwd);
+            $stmt -> bindValue (12, $usuario_nivel);
+            $stmt -> bindValue (13, $usuario_region);
+            $stmt -> bindValue (14, $usuario_delegacion);
+            $stmt -> bindValue (15, $usuario_folio);
+            $stmt -> bindValue (16, $usuario_fecha);
+            $stmt -> bindValue (17, $usuario_tituloConstancia);
+            $stmt -> bindValue (18, $usuario_observacion);
+            $stmt -> bindValue (19, $usuario_fechaCracion);
+            $stmt -> bindValue (20, $usuario_status);*/
+
+            $stmt -> bindValue (1, $usuario_name);
+            $stmt -> bindValue (2, $usuario_ap);
+            $stmt -> bindValue (3, $usuario_am);
+            // $stmt -> bindValue (4, $usuario_curp);
+            // $stmt -> bindValue (5, $usuario_rfc);
+            $stmt -> bindValue (4, $usuario_genero);
+            $stmt -> bindValue (5, $usuario_rol);
+            $stmt -> bindValue (6, $usuario_telefono);
+            $stmt -> bindValue (7, $usuario_email);
+            $stmt -> bindValue (8, $usuario_npersonal);
+            $stmt -> bindValue (9, $usuario_pwd);
+            $stmt -> bindValue (10, $usuario_nivel);
+            // $stmt -> bindValue (13, $usuario_region);
+            // $stmt -> bindValue (14, $usuario_delegacion);
+            // $stmt -> bindValue (15, $usuario_folio);
+            // $stmt -> bindValue (16, $usuario_fecha);
+            // $stmt -> bindValue (17, $usuario_tituloConstancia);
+            // $stmt -> bindValue (18, $usuario_observacion);
+            // $stmt -> bindValue (19, $usuario_fechaCracion);
+            // $stmt -> bindValue (20, $usuario_status);
+
+            $stmt->execute();
+            return $resultado = $stmt->fetchAll();
+        }
+
+        # Actualiza la información de la usuario 
+        public function update_usuario(
+                        $usuario_id,
+                        $usuario_name,
+                        $usuario_ap,
+                        $usuario_am,
+                        //$usuario_curp,
+                        //$usuario_rfc,
+                        $usuario_genero,
+                        $usuario_rol,
+                        $usuario_telefono,
+                        $usuario_email,
+                        $usuario_npersonal,
+                        $usuario_pwd,
+                        $usuario_nivel
+                        // $usuario_region,
+                        // $usuario_delegacion,
+                        // $usuario_folio,
+                        // $usuario_fecha,
+                        // $usuario_tituloConstancia,
+                        // $usuario_observacion,
+                        // $usuario_fechaCracion,
+                        // $usuario_status
+                        ) {
+        
+            $cn = parent::conexion();
+            parent::set_names();
+            
+            # Consulta para actualizar los datos del registro de la tabla usuario
+            $sql = "UPDATE `tbl_usuario` 
+                    SET usuario_name = ?,
+                        usuario_ap = ?,
+                        usuario_am = ?,
+                        -- usuario_curp = ?,
+                        -- usuario_rfc = ?,
+                        usuario_genero = ?,
+                        usuario_rol = ?,
+                        usuario_telefono = ?,
+                        usuario_email = ?,
+                        usuario_npersonal = ?,
+                        usuario_pwd = ?,
+                        usuario_nivel = ?,
+                        -- usuario_region = ?,
+                        -- usuario_delegacion = ?,
+                        -- usuario_folio = ?,
+                        usuario_fecha = CURRENT_DATE,
+                        -- usuario_tituloConstancia = ?,
+                        -- usuario_observacion = ?,
+                        usuario_fechaCracion = CURRENT_DATE,
+                        usuario_status = ?
+                    WHERE usuario_id = ?;";
+
+            $stmt = $cn->prepare($sql);
+            $stmt -> bindValue (1, $usuario_name);
+            $stmt -> bindValue (2, $usuario_ap);
+            $stmt -> bindValue (3, $usuario_am);
+            // $stmt -> bindValue (4, $usuario_curp);
+            // $stmt -> bindValue (5, $usuario_rfc);
+            $stmt -> bindValue (4, $usuario_genero);
+            $stmt -> bindValue (5, $usuario_rol);
+            $stmt -> bindValue (6, $usuario_telefono);
+            $stmt -> bindValue (7, $usuario_email);
+            $stmt -> bindValue (8, $usuario_npersonal);
+            $stmt -> bindValue (9, $usuario_pwd);
+            $stmt -> bindValue (10, $usuario_nivel);
+            // $stmt -> bindValue (13, $usuario_region);
+            // $stmt -> bindValue (14, $usuario_delegacion);
+            // $stmt -> bindValue (15, $usuario_folio);
+            // $stmt -> bindValue (16, $usuario_fecha);
+            // $stmt -> bindValue (17, $usuario_tituloConstancia);
+            // $stmt -> bindValue (18, $usuario_observacion);
+            // $stmt -> bindValue (19, $usuario_fechaCracion);
+            // $stmt -> bindValue (20, $usuario_status);
+            $stmt -> bindValue (11, $usuario_id);
+            $stmt->execute();
+
+            return $resultado = $stmt->fetchAll();           
+        }
+
+        #Elimina un usuario
+        public function delete_usuario($usuario_id){
+
+            $cn = parent::conexion();
+            parent::set_names();
+
+            # Consulta para mostrar toda la información de el usuario
+            $sql = "UPDATE `tbl_usuario` SET tbl_usuario.usuario_status = 0 WHERE tbl_usuario.usuario_id = ?";
+            $stmt = $cn->prepare($sql);
+            $stmt -> bindValue ( 1, $usuario_id);
+            $stmt->execute();
+            return $resultado = $stmt->fetchAll();
+
+        }        
+
+        #Muestra la lista de todas los usuarios en la página Index Mantenimiento Usuarios
+        public function get_usuarios(){
+            $cn = parent::conexion();
+            parent::set_names();
+
+            # Consulta para obtener toda la información de la tabla usuario 
+            $sql = "SELECT * FROM `tbl_usuario` WHERE tbl_usuario.usuario_status = 1;";
+
+            $stmt = $cn->prepare($sql);
+            $stmt->execute();
+            return $resultado = $stmt->fetchAll();
+        }
 
 
+        # Muestra el usuario dependiendo del ID principal
+        public function get_usuario_id ($usuario_id){
+            $cn = parent::conexion();
+            parent::set_names();
 
+            # Consulta para mostrar los usuarios solo por ID principal
+            $sql = "SELECT * FROM `tbl_usuario` WHERE tbl_usuario.usuario_status = 1 AND tbl_usuario.usuario_id = ?";
 
+            $stmt = $cn->prepare($sql);
+            $stmt -> bindValue ( 1, $usuario_id);
+            $stmt -> execute();
+            return $resultado = $stmt->fetchAll();
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
     }
 
 ?>

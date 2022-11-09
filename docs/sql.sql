@@ -48,3 +48,27 @@ INNER JOIN tbl_curso ON tbl_curso_usuario.curso_id = tbl_curso.curso_id
 INNER JOIN tbl_categoria on tbl_categoria.categoria_id = tbl_curso.curso_categoria_id
 INNER JOIN tbl_usuario on tbl_usuario.usuario_id = tbl_curso_usuario.usuario_id
 WHERE tbl_curso_usuario.usuario_id = 1;
+
+/** CONSULTA PARA ACTUALIZAR UN USUARIO **/
+UPDATE `tbl_usuario` 
+SET usuario_name = "ssA",
+    usuario_ap = "ssA",
+    usuario_am = "ssA",
+    -- usuario_curp = ?,
+    -- usuario_rfc = ?,
+    usuario_genero = "Mujer",
+    usuario_rol = "2",
+    usuario_telefono = "3333333333",
+    usuario_email = "ssA@yahoo.com",
+    usuario_npersonal = "123456",
+    usuario_pwd = "123456",
+    usuario_nivel = "EDUCACIÓN ESPECIAL",
+    -- usuario_region = ?,
+    -- usuario_delegacion = ?,
+    -- usuario_folio = ?,
+    usuario_fecha = CURRENT_DATE,
+    -- usuario_tituloConstancia = ?,
+    -- usuario_observacion = ?,
+    usuario_fechaCracion = CURRENT_DATE,
+    usuario_status = "1"
+WHERE usuario_id = 6;

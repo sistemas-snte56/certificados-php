@@ -177,65 +177,74 @@
 
             break;
 
-
+        /**
+         * CRUD USUARIO
+         */
+            
         # Opción para Guardar y Editar
         case "guardar_usuario" : 
 
             /**
              *  Guardar y Editar
-             *  Validamos no exista ID de usuario y se guarde como dato nuevo
-             *  Si existe un ID de usuario solamente se tiene que actualizar 
+             *  Validamos no exista ID de curso y se guarde como dato nuevo
+             *  Si existe un ID de curso solamente se tiene que actualizar 
              */
 
             # Preguntamos principalmente si usuario_id esta vacio
             if (empty($_POST["usuario_id"])) {
 
-                # Si el ID usuario viene vacio registramos la información
+                # Si viene vacio principalmente registramos la información
                 $usuario -> insert_usuario (
-
                     $_POST["usuario_name"],
                     $_POST["usuario_ap"],
                     $_POST["usuario_am"],
-                    $_POST["usuario_curp"],
-                    $_POST["usuario_rfc"],
+                    //$_POST["usuario_curp"],
+                    //$_POST["usuario_rfc"],
                     $_POST["usuario_genero"],
-                    $_POST["usuario_rol"],
+                    $_POST["usuario_type"],
                     $_POST["usuario_telefono"],
                     $_POST["usuario_email"],
                     $_POST["usuario_npersonal"],
                     $_POST["usuario_pwd"],
-                    $_POST["usuario_region"],
-                    $_POST["usuario_delegacion"],
-                    $_POST["usuario_folio"],
-                    $_POST["usuario_tituloConstancia"],
-                    $_POST["usuario_observacion"]
-                    
+                    $_POST["usuario_nivel"],
+                    //$_POST["usuario_region"],
+                    //$_POST["usuario_delegacion"],
+                    //$_POST["usuario_folio"],
+                    //$_POST["usuario_fecha"],
+                    //$_POST["usuario_tituloConstancia"],
+                    //$_POST["usuario_observacion"],
+                    //$_POST["usuario_fechaCracion"],
+                    //$_POST["usuario_status"]
                 );
-                
+
             } else {
                 
-                # Si ya hay registro actualizaremos la información agregando un parametro mas que es usuario_id
+                # Si ya hay registro de el actualizaremos la información agregando un parametro mas que es usuario_id
                 $usuario -> update_usuario(
                     $_POST["usuario_id"],
                     $_POST["usuario_name"],
                     $_POST["usuario_ap"],
                     $_POST["usuario_am"],
-                    $_POST["usuario_curp"],
-                    $_POST["usuario_rfc"],
+                    //$_POST["usuario_curp"],
+                    //$_POST["usuario_rfc"],
                     $_POST["usuario_genero"],
-                    $_POST["usuario_rol"],
+                    $_POST["usuario_type"],
                     $_POST["usuario_telefono"],
                     $_POST["usuario_email"],
                     $_POST["usuario_npersonal"],
                     $_POST["usuario_pwd"],
-                    $_POST["usuario_region"],
-                    $_POST["usuario_delegacion"],
-                    $_POST["usuario_folio"],
-                    $_POST["usuario_tituloConstancia"],
-                    $_POST["usuario_observacion"]
+                    $_POST["usuario_nivel"],
+                    //$_POST["usuario_region"],
+                    //$_POST["usuario_delegacion"],
+                    //$_POST["usuario_folio"],
+                    //$_POST["usuario_fecha"],
+                    //$_POST["usuario_tituloConstancia"],
+                    //$_POST["usuario_observacion"],
+                    //$_POST["usuario_fechaCracion"],
+                    //$_POST["usuario_status"]
                 );
             }
-                    
+            
             break;
 
         # Opción para eliminar usuario
@@ -245,10 +254,12 @@
 
             break;
 
+        # Opción para mostrar y listar todos los cursos por consulta ID
         case "listar_usuario" : 
 
             $datos = $usuario -> get_usuarios ();
             $data = Array();
+
 
             foreach($datos as $row) {
                 $sub_array = array();
@@ -257,7 +268,13 @@
                 $sub_array[] = $row["usuario_email"];
                 $sub_array[] = $row["usuario_genero"];
                 $sub_array[] = $row["usuario_telefono"];
-
+                
+                if ($row["usuario_rol"] == 1) {
+                    $sub_array[] = "USUARIO";
+                } else {
+                    $sub_array[] = "ADMINISTRADOR";
+                }
+                
                 $sub_array[] = ' <button type="button" onClick="editar_usuario('.$row["usuario_id"].');" id="'.$row["usuario_id"].'" class="btn btn-outline-warning btn-icon"><div> <i class="fa fa-edit"></i> </div></button> '
                       . " " .  ' <button type="button" onClick="eliminar_usuario('.$row["usuario_id"].');" id="'.$row["usuario_id"].'" class="btn btn-outline-danger btn-icon"><div> <i class="fa fa-trash"></i> </div></button> ';
                 $data[] = $sub_array;
@@ -273,28 +290,40 @@
             echo json_encode($results);
 
             break;
+    
+        # Opción para mostrar toda la información segun el ID que se este enviando
+        case "mostrar_usuario" :
 
-        # Mostrar todas las regiones en un combobox
-        case 'cmb_regiones' :
-   
-            $datos = $usuario -> get_regiones($_POST["usuario_region"]);
-            $data = Array();
+            # Almacenamos todo en una variable datos 
+            $datos = $usuario -> get_usuario_id ( $_POST["usuario_id"] );
 
-            /*
-            if (is_array($datos) == true AND count($datos)>0) {
+            # Verificamos que lo que venga en $datos es un array y que sea mayor a 0
+            if ( is_array($datos) == true and count($datos)<>0 ) {
+                
+                #recorremos los datos y los guardamos en filas
+                foreach ($datos as $row) {
+              
+                    $output["usuario_id"] = $row["usuario_id"];
+                    $output["usuario_name"] = $row["usuario_name"];
+                    $output["usuario_ap"] = $row["usuario_ap"];
+                    $output["usuario_am"] = $row["usuario_am"];
+                    $output["usuario_genero"] = $row["usuario_genero"];
+                    $output["usuario_rol"] = $row["usuario_rol"];
+                    $output["usuario_telefono"] = $row["usuario_telefono"];
+                    $output["usuario_email"] = $row["usuario_email"];
+                    $output["usuario_npersonal"] = $row["usuario_npersonal"];
+                    $output["usuario_pwd"] = $row["usuario_pwd"];
+                    $output["usuario_nivel"] = $row["usuario_nivel"];    
 
-                $html = "<option label='¿Selecciona Region?'></option>";
-
-                foreach($datos as $row) {
-                    $html.= "<option value='". $row['categoria_id'] ."'> " . $row['categoria_nombre'] . " </option>";
                 }
 
-                echo $html;
-            }*/
+                echo json_encode($output);
+            }
 
-            break;
-
-
+            break;       
+    
+    
+    
     }
 
 
