@@ -473,7 +473,7 @@
         /**************************************** */
 
 
-        # Inertar curso
+        # Insertar usuario
         public function insert_usuario(
             
                         $usuario_name,
@@ -487,9 +487,9 @@
                         $usuario_email,
                         $usuario_npersonal,
                         $usuario_pwd,
-                        $usuario_nivel
-                        // $usuario_region,
-                        // $usuario_delegacion,
+                        $usuario_nivel,
+                        $usuario_region,
+                        $usuario_delegacion
                         // $usuario_folio,
                         // $usuario_fecha,
                         // $usuario_tituloConstancia,
@@ -502,32 +502,6 @@
             parent::set_names();
             
             # Consulta para insertar un nuevo registro a la tabla usuario 
-            // $sql = "INSERT INTO `tbl_usuario` (`usuario_id`, `usuario_nombre`, `usuario_fecha`, `usuario_status`) VALUES (NULL, ?, now(), '1');";
-            /*$sql = "INSERT 
-                    INTO `tbl_usuario` (
-                        `usuario_id`,
-                        `usuario_name`,
-                        `usuario_ap`,
-                        `usuario_am`,
-                        `usuario_curp`,
-                        `usuario_rfc`,
-                        `usuario_genero`,
-                        `usuario_rol`,
-                        `usuario_telefono`,
-                        `usuario_email`,
-                        `usuario_npersonal`,
-                        `usuario_pwd`,
-                        `usuario_nivel`,
-                        `usuario_region`,
-                        `usuario_delegacion`,
-                        `usuario_folio`,
-                        `usuario_fecha`,
-                        `usuario_tituloConstancia`,
-                        `usuario_observacion`,
-                        `usuario_fechaCracion`,
-                        `usuario_status`) 
-                    VALUES (NULL, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,now(),'1');";*/
-
             $sql = "INSERT 
                     INTO `tbl_usuario` (
                         `usuario_id`,
@@ -543,8 +517,8 @@
                         `usuario_npersonal`,
                         `usuario_pwd`,
                         `usuario_nivel`,
-                        -- `usuario_region`,
-                        -- `usuario_delegacion`,
+                        `usuario_region`,
+                        `usuario_delegacion`,
                         -- `usuario_folio`,
                         `usuario_fecha`,
                         -- `usuario_tituloConstancia`,
@@ -553,29 +527,9 @@
                         `usuario_status`
                         
                         ) 
-                    VALUES (NULL, ?,?,?,?,?,?,?,?,?,?,now(),now(),'1');";
+                    VALUES (NULL, ?,?,?,?,?,?,?,?,?,?,?,?,now(),now(),'1');";
 
             $stmt = $cn->prepare($sql);
-            /*$stmt -> bindValue (1, $usuario_name);
-            $stmt -> bindValue (2, $usuario_ap);
-            $stmt -> bindValue (3, $usuario_am);
-            $stmt -> bindValue (4, $usuario_curp);
-            $stmt -> bindValue (5, $usuario_rfc);
-            $stmt -> bindValue (6, $usuario_genero);
-            $stmt -> bindValue (7, $usuario_rol);
-            $stmt -> bindValue (8, $usuario_telefono);
-            $stmt -> bindValue (9, $usuario_email);
-            $stmt -> bindValue (10, $usuario_npersonal);
-            $stmt -> bindValue (11, $usuario_pwd);
-            $stmt -> bindValue (12, $usuario_nivel);
-            $stmt -> bindValue (13, $usuario_region);
-            $stmt -> bindValue (14, $usuario_delegacion);
-            $stmt -> bindValue (15, $usuario_folio);
-            $stmt -> bindValue (16, $usuario_fecha);
-            $stmt -> bindValue (17, $usuario_tituloConstancia);
-            $stmt -> bindValue (18, $usuario_observacion);
-            $stmt -> bindValue (19, $usuario_fechaCracion);
-            $stmt -> bindValue (20, $usuario_status);*/
 
             $stmt -> bindValue (1, $usuario_name);
             $stmt -> bindValue (2, $usuario_ap);
@@ -589,8 +543,8 @@
             $stmt -> bindValue (8, $usuario_npersonal);
             $stmt -> bindValue (9, $usuario_pwd);
             $stmt -> bindValue (10, $usuario_nivel);
-            // $stmt -> bindValue (13, $usuario_region);
-            // $stmt -> bindValue (14, $usuario_delegacion);
+            $stmt -> bindValue (11, $usuario_region);
+            $stmt -> bindValue (12, $usuario_delegacion);
             // $stmt -> bindValue (15, $usuario_folio);
             // $stmt -> bindValue (16, $usuario_fecha);
             // $stmt -> bindValue (17, $usuario_tituloConstancia);
@@ -724,6 +678,29 @@
             return $resultado = $stmt->fetchAll();
         }
 
+
+        public function get_delegaciones_x_region($usuario_region){
+            $cn = parent::conexion();
+            parent::set_names();
+
+            $sql = "SELECT 
+                    delegacion.delegacion_id as 'id',
+                    delegacion.delegacion_name AS 'delegacion',
+                    region.region_name AS 'region'
+                    FROM `tbl_region_delegacion` `ryd` 
+                    INNER JOIN tbl_delegacion delegacion ON delegacion.delegacion_id = ryd.region_delegacion_IDdelegacion
+                    INNER JOIN tbl_region region ON region.region_id = ryd.region_delegacion_IDregion
+                    WHERE `region_delegacion_IDregion` = ?
+            ";
+
+
+            $stmt = $cn->prepare($sql);
+            $stmt->bindValue(1, $usuario_region);
+            $stmt->execute();
+            return $resultado = $stmt->fetchAll();
+
+
+        }
         
     }
 

@@ -129,7 +129,7 @@
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="icon ion-person tx-16 lh-0 op-6"></i></span>
                                                     <select class="form-control select2 "  style="color:#868e96; width:100%"  data-placeholder="-- SELECCIONA --" name="usuario_nivel" id="usuario_nivel" required tabindex="-1" aria-hidden="true">
-                                                        <option value="none" selected disabled hidden>-- SELECCIONA --</option>
+                                                        <option value="none" selected disabled hidden>SELECCIONA...</option>
                                                         <option value="PREESCOLAR">PREESCOLAR</option> 
                                                         <option value="PRIMARIA">PRIMARIA</option> 
                                                         <option value="EDUCACIÓN ESPECIAL">EDUCACIÓN ESPECIAL</option>  
@@ -147,6 +147,46 @@
                                                 </div>
                                             </div>
                                         </div><!-- col-4 -->     
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">REGIÓN: <span class="tx-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="icon ion-person tx-16 lh-0 op-6"></i></span>
+                                                    <select class="form-control select2 "  style="color:#868e96; width:100%" onchange="selectRegion(this.value)" data-placeholder="-- SELECCIONA --" name="usuario_region" id="usuario_region" required tabindex="-1" aria-hidden="true">
+                                                        <option value="none" selected disabled hidden>-- SELECCIONA --</option>
+                                                        <option value="1">REGIÓN I - TANTOYUCA</option>
+                                                        <option value="2">REGIÓN II - TUXPAN</option>
+                                                        <option value="3">REGIÓN III - POZA RICA</option>
+                                                        <option value="4">REGIÓN IV - MTZ DE LA TORRE</option>
+                                                        <option value="5">REGIÓN V - XALAPA</option>
+                                                        <option value="6">REGIÓN VI - VERACRUZ</option>
+                                                        <option value="7">REGIÓN VII - CORDOBA</option>
+                                                        <option value="8">REGIÓN VIII - ORIZABA</option>
+                                                        <option value="9">REGIÓN IX - COSAMALOAPAN</option>
+                                                        <option value="10">REGIÓN X - SAN ANDRES TUXTLA</option>
+                                                        <option value="11">REGIÓN XI - MINATITLAN</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div> 
+
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">DELEGACIÓN: <span class="tx-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="icon ion-person tx-16 lh-0 op-6"></i></span>
+                                                    <select class="form-control select2 "  style="color:#868e96; width:100%"  data-placeholder="-- SELECCIONA --" name="usuario_delegacion" id="usuario_delegacion" required tabindex="-1" aria-hidden="true">
+                                                        
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        
 
                                     </div><!-- row -->
                                 </div><!-- form-layout -->

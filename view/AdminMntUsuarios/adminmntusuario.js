@@ -46,6 +46,14 @@ $(document).ready(function () {
         dropdownParent: $('#modal_nusuario')
     });
 
+    $('#usuario_region').select2({
+        dropdownParent: $('#modal_nusuario')
+    });
+
+    $('#usuario_delegacion').select2({
+        dropdownParent: $('#modal_nusuario')
+    });
+
     $('#tbl_usuarios').DataTable({
         "aProcessing": true,
         "aServerSide": true,
@@ -149,12 +157,24 @@ function eliminar_usuario(usuario_id) {
 }
 
 
+function selectRegion(usuario_region) {
+
+    $.post("../../controller/UsuarioController.php?opcion=get_delegaciones", { usuario_region: usuario_region }, function (data) {
+
+        $('#usuario_delegacion').html(data);
+
+    });    
+}
+
+
 function nuevo_usuario() {
     $("#usuario_id").val('');
 
     $('#usuario_genero').val('').trigger('change');
     $('#usuario_nivel').val('').trigger('change');
     $('#usuario_type').val('').trigger('change');
+    $('#usuario_region').val('').trigger('change');
+    $('#usuario_delegacion').val('').trigger('change');
 
     $('#lbl_titulo').html('NUEVO REGISTRO');
     $('#usuarios_form')[0].reset();

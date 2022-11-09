@@ -186,14 +186,14 @@
 
             /**
              *  Guardar y Editar
-             *  Validamos no exista ID de curso y se guarde como dato nuevo
-             *  Si existe un ID de curso solamente se tiene que actualizar 
+             *  Validamos no exista ID de usuario y se guarde como dato nuevo
+             *  Si existe un ID de usuario solamente se tiene que actualizar 
              */
 
             # Preguntamos principalmente si usuario_id esta vacio
             if (empty($_POST["usuario_id"])) {
 
-                # Si viene vacio principalmente registramos la información
+                # Si viene vacio registramos la información
                 $usuario -> insert_usuario (
                     $_POST["usuario_name"],
                     $_POST["usuario_ap"],
@@ -207,8 +207,8 @@
                     $_POST["usuario_npersonal"],
                     $_POST["usuario_pwd"],
                     $_POST["usuario_nivel"],
-                    //$_POST["usuario_region"],
-                    //$_POST["usuario_delegacion"],
+                    $_POST["usuario_region"],
+                    $_POST["usuario_delegacion"],
                     //$_POST["usuario_folio"],
                     //$_POST["usuario_fecha"],
                     //$_POST["usuario_tituloConstancia"],
@@ -321,7 +321,25 @@
             }
 
             break;       
-    
+        #Opción para colocar las delegaciones en combobox
+        case "get_delegaciones" :
+            # Almacenamos todo en una variable datos 
+            $datos = $usuario -> get_delegaciones_x_region( $_POST["usuario_region"] );
+            $data = Array();
+
+            # Verificamos que lo que venga en $datos es un array y que sea mayor a 0
+            if (is_array($datos) == true and count($datos) <> 0) {
+                
+                #recorremos los datos y los guardamos en filas
+                $html = "<option value='none' selected disabled hidden>-- SELECCIONA --</option>";
+                foreach ($datos as $row) {
+                    $html.= "<option value='".$row['delegacion'] ."'> " . $row['delegacion'] . " </option>";
+                }
+                echo json_encode($datos);
+                echo $html;
+            }
+
+            break;    
     
     
     }

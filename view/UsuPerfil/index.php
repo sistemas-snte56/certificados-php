@@ -119,20 +119,20 @@
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label">Nivel educativo: <span class="tx-danger">*</span></label>
                                         <select class="form-control select2" data-placeholder="Selecciona..."  name="usuario_nivel" id="usuario_nivel" required >
-                                            <option label="Selecciona..."></option>
-                                            <option value="Preescolar">Preescolar</option>
-                                            <option value="Primaria">Primaria</option>
-                                            <option value="Educación Especial">Educación Especial</option>
-                                            <option value="Secundaria">Secundaria</option>
-                                            <option value="Educación Física">Educación Física</option>
-                                            <option value="Niveles Especiales">Niveles Especiales</option>
-                                            <option value="Telesecundarias">Telesecundarias</option>
-                                            <option value="PAAE">PAAE</option>
-                                            <option value="Bachillerato">Bachillerato</option>
-                                            <option value="Telebachillerato">Telebachillerato</option>
-                                            <option value="Normales">Normales</option>
-                                            <option value="UPV">UPV</option>
-                                            <option value="Pensionados y Jubilados">Pensionados y Jubilados</option>
+                                            <option value="none" selected disabled hidden>SELECCIONA...</option>
+                                            <option value="PREESCOLAR">PREESCOLAR</option> 
+                                            <option value="PRIMARIA">PRIMARIA</option> 
+                                            <option value="EDUCACIÓN ESPECIAL">EDUCACIÓN ESPECIAL</option>  
+                                            <option value="SECUNDARIA">SECUNDARIA</option> 
+                                            <option value="EDUCACIÓN FÍSICA">EDUCACIÓN FÍSICA</option>
+                                            <option value="NIVELES ESPECIALES">NIVELES ESPECIALES</option>
+                                            <option value="TELESECUNDARIAS">TELESECUNDARIAS</option> 
+                                            <option value="PAAE">PAAE</option> 
+                                            <option value="BACHILLERATO">BACHILLERATO</option> 
+                                            <option value="TELEBACHILLERATO">TELEBACHILLERATO</option> 
+                                            <option value="NORMALES">NORMALES</option> 
+                                            <option value="UPV">UPV</option> 
+                                            <option value="PENSIONADOS Y JUBILADOS">PENSIONADOS Y JUBILADOS</option> 
                                         </select>
                                     </div>
                                 </div><!-- col-4 -->
