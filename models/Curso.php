@@ -135,6 +135,19 @@
             return $resultado = $stmt->fetch();
         }
 
+        # Poner en estatus borrado 0 el curso seleccionado
+        public function delete_curso_usuario($curso_usuario_id) {
+            $cn = parent::conexion();
+            parent::set_names();
+
+            # Consulta para mostrar toda la información del curso
+            $sql = "UPDATE `tbl_curso_usuario` SET `curso_usuario_status` = '0' WHERE `tbl_curso_usuario`.`curso_usuario_id` = ?;";
+            $stmt = $cn->prepare($sql);
+            $stmt -> bindValue ( 1, $curso_usuario_id);
+            $stmt->execute();
+            return $resultado = $stmt->fetchAll();            
+        }
+
     }
 
 ?>

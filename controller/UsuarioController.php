@@ -107,6 +107,37 @@
             echo json_encode($results);
             break;
 
+        # Mostrar todos los usuarios que pertenecen a un curso en especifico 
+        case 'listar_cursos_usuario':
+            $datos = $usuario -> get_cursos_usuario_x_id($_POST["curso_id"]);
+            $data = Array();
+
+            foreach($datos as $row) {
+                $sub_array = array();
+
+                $sub_array[] = $row["NOMBRE_USUARIO"];
+                $sub_array[] = $row["AP_USUARIO"];
+                $sub_array[] = $row["AM_USUARIO"];
+                $sub_array[] = $row["FECHA_INICIAL"];
+                $sub_array[] = $row["FECHA_FINAL"];
+
+                $sub_array[] = ' <button type="button" onClick="certificado('.$row["CURSO_USUARIO"].');" id="'.$row["CURSO_USUARIO"].'" class="btn btn-outline-primary btn-icon"><div> <i class="fa fa-id-card-o"></i> </div></button> '
+                      . " " .  ' <button type="button" onClick="delete_curso_usuario('.$row["CURSO_USUARIO"].');" id="'.$row["CURSO_USUARIO"].'" class="btn btn-outline-danger btn-icon"><div> <i class="fa fa-trash"></i> </div></button> ';
+
+                $data[] = $sub_array;
+
+            }
+
+            $results = array(
+                "sEcho" => 1,
+                "TotalRecords" => count($data),
+                "iTotalDisplayRecords" => count($data),
+                "aaData" => $data
+            );
+
+            echo json_encode($results);
+            break;
+
         # Mostrar información del usuario en la vista perfil
         case 'mostrar_usuario_x_id' :
 
@@ -270,7 +301,7 @@
                 $sub_array[] = $row["usuario_telefono"];
                 
                 if ($row["usuario_rol"] == 1) {
-                    $sub_array[] = "USUARIO";
+                    $sub_array[] = "USUARIO ";
                 } else {
                     $sub_array[] = "ADMINISTRADOR";
                 }
@@ -278,6 +309,9 @@
                 $sub_array[] = ' <button type="button" onClick="editar_usuario('.$row["usuario_id"].');" id="'.$row["usuario_id"].'" class="btn btn-outline-warning btn-icon"><div> <i class="fa fa-edit"></i> </div></button> '
                       . " " .  ' <button type="button" onClick="eliminar_usuario('.$row["usuario_id"].');" id="'.$row["usuario_id"].'" class="btn btn-outline-danger btn-icon"><div> <i class="fa fa-trash"></i> </div></button> ';
                 $data[] = $sub_array;
+
+
+                
             }
 
             $results = array(

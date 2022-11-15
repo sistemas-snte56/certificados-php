@@ -91,7 +91,6 @@
             $datos = $curso -> get_curso ();
             $data = Array();
 
-
             foreach($datos as $row) {
                 $sub_array = array();
 
@@ -101,9 +100,8 @@
                 $sub_array[] = $row["curso_fecha_inicial"];
                 $sub_array[] = $row["curso_fecha_final"];
                 $sub_array[] = $row["instructor_name"] . " " . $row["instructor_ap"] . " " . $row["instructor_am"];
-                $sub_array[] = ' <button type="button" onClick="editar_curso('.$row["curso_id"].');" id="'.$row["curso_id"].'" class="btn btn-outline-warning btn-icon"><div> <i class="fa fa-edit"></i> </div></button> '
-                      . " " .  ' <button type="button" onClick="eliminar_curso('.$row["curso_id"].');" id="'.$row["curso_id"].'" class="btn btn-outline-danger btn-icon"><div> <i class="fa fa-trash"></i> </div></button> ';
-                // $sub_array[] = ' <button type="button" onClick="eliminar('.$row["curso_id"].');" id="'.$row["curso_id"].'" class="btn btn-outline-danger btn-icon"><div> <i class="fa fa-id-card-o"></i> </div></button> ';
+                $sub_array[] = ' <button type="button" onClick="editar_curso  ('.$row["curso_id"].');" id="'.$row["curso_id"].'" class="btn btn-outline-warning btn-icon"><div> <i class="fa fa-edit"> </i> </div></button> '
+                      . " " .  ' <button type="button" onClick="eliminar_curso('.$row["curso_id"].');" id="'.$row["curso_id"].'" class="btn btn-outline-danger btn-icon"> <div> <i class="fa fa-trash"></i> </div></button> ';
                 $data[] = $sub_array;
             }
 
@@ -118,6 +116,29 @@
 
             break;
 
+        # Opción para mostrar y listar todos las categorías en un combobox para la página Cursos
+        case "combobox_cursos" : 
+
+            $datos = $curso -> get_curso();
+            $data = Array();
+
+            if (is_array($datos) == true AND count($datos)>0) {
+
+                $html = "<option label='¿Selecciona Instructor?'></option>";
+
+                foreach($datos as $row) {
+                    $html.= "<option value='". $row['curso_id'] ."'> " . $row['curso_name'] . " </option>";
+                }
+
+                echo $html;
+            }
+            
+            break;
+
+        # Eliminar curso por usuario
+        case "delete_curso_usuario" : 
+            $curso -> delete_curso_usuario ($_POST['curso_id']);
+            break;
     }
 
 ?>

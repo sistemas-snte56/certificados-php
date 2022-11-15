@@ -1,104 +1,110 @@
 <?php
+# Aqui llamamos al archivo de conexión
+require_once("../../config/conexion.php");
+#Si existe variable de sesion muestra el contenido
+if (isset($_SESSION["usuario_id"])) {?>
+    <!DOCTYPE html>
+    <html lang="es">
+            <head>
+                <?php require_once '../../view/html/mainhead.php'; ?>
+                <title>Sección56|SNTE :: Inicio</title>
+            </head>
+        <body>
+            <?php
+                require_once '../../view/html/left-panel.php';
+                require_once '../../view/html/head-panel.php';
+            ?>
+            <!-- ########## START: MAIN PANEL ########## -->
+            <div class="br-mainpanel">
+                <div class="br-pageheader pd-y-15 pd-l-20">
+                    <nav class="breadcrumb pd-0 mg-0 tx-12">
+                        <a class="breadcrumb-item" href="http://certificados-php.test/view/UsuHome/">Inicio</a>
+                        <a class="breadcrumb-item" href="http://certificados-php.test/view/AdminMntDetalleCertificados/">Mantenimiento</a>
+                        <span class="breadcrumb-item active">Detalle Certificados</span>
+                    </nav>
+                </div>
+                <div class="pd-30">
+                    <h4 class="tx-gray-800 mg-b-5">Mantenimiento de Detalle Certificados</h4>
+                    <p class="mg-b-0">Página para mostrar toda la información de los Detalle Certificados.</p>
+                </div><!-- d-flex -->                
 
-    # Aqui llamamos al archivo de conexión
-    require_once("../../config/conexion.php");
+                <div class="pd-30">
 
-    #Si existe variable de sesion muestra el contenido
-    if (isset($_SESSION["usuario_id"])) {
-?>
-
-        <!DOCTYPE html>
-        <html lang="es">
-                <head>
-                    <?php require_once '../../view/html/mainhead.php'; ?>
-                    <title>Sección56|SNTE :: Inicio</title>
-                </head>
-            <body>
-                <?php
-                    require_once '../../view/html/left-panel.php';
-                    require_once '../../view/html/head-panel.php';
-                ?>
-                <!-- ########## START: MAIN PANEL ########## -->
-                <div class="br-mainpanel">
-
-                    <div class="pd-30">
-                        <h4 class="tx-gray-800 mg-b-5">Página principal</h4>
-                        <p class="mg-b-0"></p>
-                    </div><!-- d-flex -->                
-
-                    <div class="br-pagebody mg-t-5 pd-x-30">
-
-
-                        <div class="row row-sm">
-                            <div class="col-sm-6 col-xl-3">
-                                <div class="bg-teal rounded overflow-hidden">
-                                    <div class="pd-25 d-flex align-items-center">
-                                        <i class="fa fa-address-card-o tx-60 lh-0 tx-white op-7"></i>
-                                        <div class="mg-l-20">
-                                            <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Total de Cursos</p>
-                                            <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1" id="total_cursos"></p>
-                                        </div>
+                    <div class="form-layout">
+                        <div class="row ">
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <label class="form-control-label"> <strong> CURSO: </strong></label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="icon ion-bookmark tx-16 lh-0 op-6"></i></span>
+                                        <select class="form-control select2"  style="color:#868e96; width:100%"  data-placeholder="Selecciona..." name="curso_id" id="curso_id" required tabindex="-1" aria-hidden="true">
+                                        </select>
                                     </div>
                                 </div>
-                            </div><!-- col-3 -->
-                        </div><!-- row -->
+                            </div><!-- col-5 -->
 
-
-                        <div class="card bd-0 shadow-base pd-30 mg-t-20">
-                            <div class="d-flex align-items-center justify-content-between mg-b-30">
-                                <div>
-                                    <h6 class="tx-13 tx-uppercase tx-inverse tx-semibold tx-spacing-1">Resumen total de cursos</h6>
-                                    <p class="mg-b-0"><i class="fa fa-address-book mg-r-5"></i> Aquí podra visualizar los cursos</p>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="form-control-label">&nbsp</label>
+                                    <div class="input-group">
+                                        <button class="btn btn-warning" id="nuevo_instructor" onclick="nuevo_instructor()"  data-toggle="modal" ><i class="fa fa-plus"></i> Nuevo Instructor</button>
+                                    </div>
                                 </div>
-                            </div><!-- d-flex -->
+                            </div><!-- col-5 -->
+                        </div><!-- row -->
+                    </div><!-- form-layout -->
 
-                            <div class="table-wrapper">
-                                <table id="tbl_cursos" class="display responsive nowrap" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>Cursos</th>
-                                            <th>Fecha de Inicio</th>
-                                            <th>Fecha Final</th>
-                                            <th>Instructor</th>
-                                            <th>Estatus</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Cursos</th>
-                                            <th>Fecha de Inicio</th>
-                                            <th>Fecha Final</th>
-                                            <th>Instructor</th>
-                                            <th>Estatus</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div><!-- table-wrapper -->
-                        </div><!-- card -->
 
-                    </div>
+                </div><!-- d-flex -->                
 
-                    <!-- Contenido del proyecto  -->
+                <!-- Contenido del proyecto  -->
+                
+                <div class="br-pagebody">
+                    
+                    
+                    <div class="card bd-0 shadow-base pd-30 mg-t-20">
 
-                    <div class="br-pagebody">
-                        <!-- start you own content here -->
-                    </div><!-- br-pagebody -->
 
-                    <?php require_once '../../view/html/footer-panel.php'; ?>
-                </div><!-- br-mainpanel -->
-                <!-- ########## END: MAIN PANEL ########## -->
-                <?php require_once '../../view/html/mainfooter.php'; ?>
-                <script type="text/javascript" src="usuhome.js"></script>
-            </body>
-        </html>
+
+                        <div class="table-wrapper">
+                            <table id="tbl_cursos_usuario" class="display responsive nowrap" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>NOMBRE</th>
+                                        <th>PRIMER APELLIDO</th>
+                                        <th>SEGUNDO APELLIDO</th>
+                                        <th>FECHA INICIAL</th>
+                                        <th>FECHA FECHA FINAL</th>
+                                        <th>EDICIÓN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>NOMBRE</th>
+                                        <th>PRIMER APELLIDO</th>
+                                        <th>SEGUNDO APELLIDO</th>
+                                        <th>FECHA INICIAL</th>
+                                        <th>FECHA FECHA FINAL</th>
+                                        <th>EDICIÓN</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div><!-- table-wrapper -->
+                    </div><!-- card -->
+                </div><!-- br-pagebody -->
+                <?php require_once '../../view/html/footer-panel.php'; ?>
+            </div><!-- br-mainpanel -->
+            <!-- ########## END: MAIN PANEL ########## -->
+            <?php require_once 'modalmntdetallecertificados.php'; ?>
+            <?php require_once '../../view/html/mainfooter.php'; ?>
+            <script type="text/javascript" src="adminmntdetallecertificados.js"></script>
+        </body>
+    </html>
 <?php
-    } else {
-        header('Location:' . Conectar::ruta() . '../view/404/');
-    }
-?>
-
-
+} else {
+    header('Location:' . Conectar::ruta() . '../view/404/');
+}?>
