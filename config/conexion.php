@@ -1,35 +1,33 @@
 <?php
-
-    # Inicializamos la sesion del usuario
+    /* Inicializando la sesion del usuario */
     session_start();
 
-    // Se inicia la clase conectar
+    /* Iniciamos Clase Conectar */
     class Conectar{
-        
-        protected $db;
+        protected $dbh;
 
-        # Función protegida de la cadena de conexión
-        protected function Conexion() {
+        /* Funcion Protegida de la cadena de Conexion */
+        protected function Conexion(){
             try {
-                #Connexión
-                $cn = $this->db = new PDO("mysql:local=localhost;dbname=certificados-php","root","");
-                return $cn;
-            } catch (Exception $e) {
-                #Error en la cadena de conexión
-                print "¡Error DataBase!: ". $e->getMessage() . "<br/>";
-                die();
-            }
+                /* Cadena de Conexion */
+				$conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=certificados-php","root","");
+				return $conectar;
+			} catch (Exception $e) {
+                /* En Caso hubiera un error en la cadena de conexion */
+				print "¡Error BD!: " . $e->getMessage() . "<br/>";
+				die();
+			}
         }
 
-        #Impide que haya problemas con tildes y ñ
-        public function set_names() {
-            return $this->db->query("SET NAMES 'utf8'");
+        /* Para impedir que tengamos problemas con las ñ o tildes */
+        public function set_names(){
+            return $this->dbh->query("SET NAMES 'utf8'");
         }
 
-        #Ruta principal del proyecto
-        public static function ruta() {
+        /* Ruta principal del proyecto */
+        public static function ruta(){
             return "http://certificados-php.test/";
         }
-    }
 
+    }
 ?>
