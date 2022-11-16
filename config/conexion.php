@@ -28,6 +28,5 @@
         public static function ruta(){
             return "http://certificados-php.test/";
         }
-
     }
 ?>
