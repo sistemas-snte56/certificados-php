@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" class="pos-relative">
     <head>
-        <?php require_once("../html/MainHead.php"); ?>
+        <?php require_once("../html/mainhead.php"); ?>
         <title>Certificado</title>
     </head>
 

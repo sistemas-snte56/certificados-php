@@ -4,6 +4,9 @@ const ctx = canvas.getContext('2d');
 /* Inicializamos la imagen */
 const image = new Image();
 
+/* Inicializamos una nueva imagen para qr*/
+const imageqr = new Image();
+
 $(document).ready(function(){
     var curd_id = getUrlParameter('curd_id');
 
@@ -14,6 +17,12 @@ $(document).ready(function(){
         image.src = data.cur_img;
         /* Dimensionamos y seleccionamos imagen */
         ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+        /* Ruta de la Imagen QR */
+        imageqr.src = "../../public/qr/"+curd_id+".png";
+        /* Dimensionamos y seleccionamos imagen */
+        ctx.drawImage(imageqr, 420, 400, 100, 100);  
+
 
         /* Definimos tamaño de la fuente */
         ctx.font = '40px Arial';

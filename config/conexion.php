@@ -9,8 +9,13 @@
         /* Funcion Protegida de la cadena de Conexion */
         protected function Conexion(){
             try {
-                /* Cadena de Conexion */
+                /* Cadena de Conexion Local */
 				$conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=certificados-php","root","");
+
+                /* Cadena de Conexion Hosting */
+				// $conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=certificados-php","certificados","hgM=HkkK[zfk");
+
+
 				return $conectar;
 			} catch (Exception $e) {
                 /* En Caso hubiera un error en la cadena de conexion */
@@ -26,7 +31,11 @@
 
         /* Ruta principal del proyecto */
         public static function ruta(){
+            // Ruta de prueba
             return "http://certificados-php.test/";
+
+            // Ruta de produccion 
+            // return "https://seccion56.org/certificados-2023/";
         }
     }
 ?>
